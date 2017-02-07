@@ -1,0 +1,29 @@
+{
+  "name": "y",
+  "homepage": "y",
+  "authors": [
+    "yy"
+  ],
+  "description": "y",
+  "main": "y",
+  "keywords": [
+    "yy"
+  ],
+  "license": "y",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "howler.js": "howler#^2.0.2",
+    "firebase": "^3.6.8",
+    "angular": "^1.6.1",
+    "angular-route": "^1.6.1",
+    "jquery": "^3.1.1",
+    "materialize": "^0.98.0"
+  }
+}
