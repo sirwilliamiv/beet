@@ -1,3 +1,3 @@
-app.controller('loginCtrl', function($scope, $location) {
+app.controller('loginCtrl', function() {
 console.log("login")
 });

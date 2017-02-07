@@ -1,3 +1,3 @@
-app.controller('homeCtrl', function($scope, $location) {
+app.controller('homeCtrl', function() {
 console.log("homeCtrl")
 });

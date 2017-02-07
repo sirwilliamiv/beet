@@ -1,4 +1,4 @@
-const app = angular.module('beetApp',['ngRoute']);
+const app = angular.module('beetApp', ['ngRoute']);
 
 
 

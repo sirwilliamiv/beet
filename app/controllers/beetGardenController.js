@@ -1,3 +1,3 @@
-app.controller('beetGardenCtrl', function($scope, $location) {
+app.controller('beetGardenCtrl', function() {
 console.log("beetgarden")
 });

@@ -1,3 +1,3 @@
-app.controller('logoutCtrl', function($scope, $location) {
+app.controller('logoutCtrl', function() {
 console.log("logout")
 });
