@@ -10,29 +10,47 @@ app.controller('homeCtrl', function($http, $scope) {
   const grid = 16;
 
   $scope.sing = () => {
-    let rows =[]
+    let rows = []
     for (file in sounds) {
-//add sample
+      //add sample
       let sample = new Howl({
-        src: [`'sounds' + '.'+ file`],
-        volume: 1.0
-      })
-//combine sample and  name
+          src: [`'sounds' + '.'+ file`],
+          volume: 1.0
+        })
+        //combine sample and  name
       let track = {
-        name: file,
-        sample: sample
+          name: file,
+          sample: sample
+        }
+        // add 16 tracks per row
+      for (var i = 0; i < grid; i++) {
+        rows.push(track)
       }
-// add 16 tracks per row
-      for(var i = 0; i < grid;i++) {
-         rows.push(track)
-      }
-    }  //end for in loop
-    return $scope.rows
+    } //end for in loop
+    // return $scope.rows
     console.log(rows)
+    $scope.rows = rows
+    debugger
+  //   let r1 =''
+  //   let r2 =''
+  //   let r3 =''
+  //   let r4 =''
+  //   for (var i = 0; i < rows.length; i++) {
+  //     if (i <= 15) {
+  //       $scope.r1 = i
+  //     }
+  //     if (i > 15 && i <= 31) {
+  //       $scope.r2 = i
+  //     }
+  //     if (i > 31 && i <= 47) {
+  //       $scope.r3 = i
+  //     }
+  //     if (i > 47) {
+  //       $scope.r4 = i
+  //     }
+  //     debugger
+  // }  //end rows for loop
+}
 
-
-
-
-  }
 
 });
