@@ -1,7 +1,10 @@
 <h1 ng-click="sing()">home</h1>
+<div ng-click="play()">Play</div>
 <ul ng-repeat="instrument in instruments">
   <li ng-repeat="beat in instrument track by $index">
-    {{$index}} {{beat.name}}
+   <!--  {{$index}} {{beat.name}} -->
+    <input type="checkbox" id="test{{beat.name}}" ng-model="beat.value" />
+      <label for="test{{beat.name}}">{{beat.name}}</label>
 <!-- {{beat.name}} -->
 <!-- <div>{{key.name}}</div> -->
 </li>
