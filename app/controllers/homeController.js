@@ -8,7 +8,7 @@ app.controller('homeCtrl', function($http, $scope, $timeout) {
     openhihat: 'openHH.mp3'
   };
   const grid = 16;
-
+  $scope.playing = false
 
 
   // $scope.sing = () => {
@@ -29,11 +29,10 @@ app.controller('homeCtrl', function($http, $scope, $timeout) {
     for (var i = 0; i < grid; i++) {
 
       let track = {
-        name: name + i,
-        sample: sample
-      }
-
-      //add tracks to instruments object by name
+          name: name + i,
+          sample: sample
+        }
+        //add tracks to instruments object by name
       instruments[name].push(track)
     } // end grid for loop
   } //end sounds for in loop
@@ -42,24 +41,35 @@ app.controller('homeCtrl', function($http, $scope, $timeout) {
   $scope.instruments = instruments
 
   // } //end sing
+
   $scope.play = () => {
-      console.log("hey")
+    for (instrument in instruments) {
+      $scope.playing = true
+      // let kick = instruments.kick
 
-      let kick = instruments.kick
       for (var i = 0; i < grid; i++) {
-        let sound = kick[i].sample
-        let value = kick[i].value
-      if(value) {
-        sound.play()
-      }
 
+        let tempo = 200 * i
+        let sound = instruments[instrument][i].sample
+        let value = instruments[instrument][i].value
+          //test if  value is true
+        if (value) {
+          $timeout(function() {
+              sound.play() //play sound
+            }, tempo) // set time interval
+        } else {
+          $timeout(function() {}, tempo)
+        }
       }
-
+      $timeout($scope.play, 3200) //
     }
-    //start at index zero
-    //if checked
-    //play
-    //else index + 1
+  }
+
+
+  //start at index zero
+  //if checked
+  //play
+  //else index + 1
 
   //   ///play the sound
   // $scope.play = (beat) => {
