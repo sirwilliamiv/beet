@@ -1,3 +1,6 @@
 body {
   background: lightgrey;
 }
+.live {
+  background-color: green;
+}
