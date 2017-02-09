@@ -1,4 +1,4 @@
-app.controller('homeCtrl', function($http, $scope, $timeout) {
+app.controller('homeCtrl', function($http, $scope, $timeout, $interval) {
   console.log("homeCtrl")
 
   const sounds = {
@@ -22,7 +22,8 @@ app.controller('homeCtrl', function($http, $scope, $timeout) {
   for (name in sounds) {
     let sample = new Howl({
         src: [`/assets/audio/beet/${sounds[name]}`],
-        volume: 1.0
+        volume: 0.8,
+        html5: true
       })
       //combine sample and  name
       // add 16 tracks per row
@@ -41,35 +42,104 @@ app.controller('homeCtrl', function($http, $scope, $timeout) {
   $scope.instruments = instruments
 
   // } //end sing
+  $scope.time = 1000
+    //acquire sounds
+  $scope.aquire = () => {
+      // var timing=  window.setInterval($scope.aquire,3200)
 
-  $scope.play = () => {
-    for (instrument in instruments) {
-      $scope.playing = true
-      // let kick = instruments.kick
+      for (instrument in instruments) {
 
-      for (var i = 0; i < grid; i++) {
+        for (var i = 0; i < grid; i++) {
+          var sound = instruments[instrument][i].sample
+          var value = instruments[instrument][i].value
+          console.log("sound", instrument)
+          $scope.timeout(value, sound, i)
 
-        let tempo = 200 * i
-        let sound = instruments[instrument][i].sample
-        let value = instruments[instrument][i].value
-          //test if  value is true
-        if (value) {
-          $timeout(function() {
-              sound.play() //play sound
-            }, tempo) // set time interval
-        } else {
-          $timeout(function() {}, tempo)
-        }
+        } //end for loop
+
       }
-      $timeout($scope.play, 3200) //
     }
+    // test if  value is true
+  // $scope.play = (value, sound, i) => {
+  //   //     if (value) {
+  //   //      sound.play() //play sound
+  //   //       console.log("playing")
+  //   // // $timeout($scope.repeat, (400 * i))
+  //   //     }
+  // }
+  $scope.timeout= function(value,sound,i) {
+    setTimeout(function() {
+      if (value) {
+        sound.play() //play sound
+        console.log("playing")
+          // $timeout($scope.repeat, (400 * i))
+      }
+      console.log('calling timeout')
+      $scope.timeout(value,sound,i);
+    }, 1000);
   }
 
 
-  //start at index zero
-  //if checked
-  //play
-  //else index + 1
+  // // test 3 FAIL
+  // $scope.play = () => {
+  //   for (instrument in instruments) {
+  //     $scope.playing = true
+  //     for (var i = 0; i < grid; i++) {
+
+  //       let tempo = 200 * i
+  //       var sound = instruments[instrument][i].sample
+  //       var value = instruments[instrument][i].value
+  //         //test if  value is true
+  //       if (value) {
+  //         $timeout(function() {
+  //             sound.play() //play sound
+  //           }, tempo) // set time interval
+  //       } else {
+  //         $timeout(function() {}, tempo)
+  //       }
+  //     }
+
+  //     $timeout($scope.play, 3200).flush() //
+  //   }
+  // }
+  // test1 --FAIL
+  // $scope.play = () => {
+  //   for (instrument in instruments) {
+  //     $scope.playing = true
+  //     for (var i = 0; i < grid; i++) {
+
+  //       let tempo = 200 * i
+  //       let sound = instruments[instrument][i].sample
+  //       let value = instruments[instrument][i].value
+  //         //test if  value is true
+  //       if (value) {
+  //          switch (instruments[instrument]) {
+
+  //            case 'kick':
+  //               sound.play()
+  //           break;
+  //            default:
+  //              instruments.hihat[0].sample.play()
+  //           break;
+  //         }
+
+  //        } else {
+  //         $timeout(function() {}, tempo)
+  //       }
+  //     }
+  //     $timeout($scope.play, 3200) //
+  //   }
+  // }
+
+
+  // test 2--FAIL//writing loop by hand
+  // $scope.play = () => {
+  //   for(var i = 0; i < 2; i++){
+
+  //   instruments.kick[0].sample.play()
+  // }
+  // }
+  //mess with it
 
   //   ///play the sound
   // $scope.play = (beat) => {
