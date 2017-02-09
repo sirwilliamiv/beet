@@ -42,14 +42,14 @@ app.controller('homeCtrl', function($http, $scope, $timeout, $interval) {
   $scope.instruments = instruments
 
   // } //end sing
-  $scope.time = 1000
+
     //acquire sounds
-  $scope.aquire = () => {
+$scope.aquire = () => {
       // var timing=  window.setInterval($scope.aquire,3200)
 
       for (instrument in instruments) {
 
-        for (var i = 0; i < grid; i++) {
+        for (let i = 0; i < grid; i++) {
           var sound = instruments[instrument][i].sample
           var value = instruments[instrument][i].value
           console.log("sound", instrument)
@@ -61,22 +61,22 @@ app.controller('homeCtrl', function($http, $scope, $timeout, $interval) {
     }
     // test if  value is true
   // $scope.play = (value, sound, i) => {
-  //   //     if (value) {
-  //   //      sound.play() //play sound
-  //   //       console.log("playing")
-  //   // // $timeout($scope.repeat, (400 * i))
-  //   //     }
+  //       if (value) {
+  //        sound.play() //play sound
+  //         console.log("playing")
+  //       } else {}
   // }
   $scope.timeout= function(value,sound,i) {
     setTimeout(function() {
       if (value) {
         sound.play() //play sound
-        console.log("playing")
+        console.log("i",i)
+        console.log("value",value)
           // $timeout($scope.repeat, (400 * i))
       }
       console.log('calling timeout')
-      $scope.timeout(value,sound,i);
-    }, 1000);
+      // $scope.timeout(value,sound,i);
+    }, 125 * i);
   }
 
 
