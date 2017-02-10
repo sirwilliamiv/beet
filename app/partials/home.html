@@ -1,6 +1,7 @@
 <h1 ng-click="sing()"> beet home</h1>
 <input type="text" ng-model="bpm" placeholder="BPM">
-<div ng-click="loadPattern()">Play</div>
+<div ng-click="play()">Play</div>
+<br><br><br><br><br>
 <div ng-click="stop()">Stop</div>
 <ul ng-repeat="instrument in instruments">
   <li ng-repeat="beat in instrument track by $index">

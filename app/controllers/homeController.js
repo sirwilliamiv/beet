@@ -8,8 +8,9 @@ app.controller('homeCtrl', function($http, $scope, $timeout, $interval) {
     openhihat: 'openHH.mp3'
   };
   const grid = 16;
-  $scope.playing = false
+  const song = 8;
 
+  let intervalId = 0; // becomes the setInterval id
 
   // $scope.sing = () => {
   let instruments = {
@@ -43,44 +44,51 @@ app.controller('homeCtrl', function($http, $scope, $timeout, $interval) {
   // } //end sing
 
   //acquire sounds
-  $scope.loadPattern = () => {
-    console.log($scope.bpm)
-    let time = 60000 / $scope.bpm
-    let measure = time * 4
-    let beat = time / 4
+  $scope.loadPattern = (beat) => {
+
     for (instrument in instruments) {
       for (let i = 0; i < grid; i++) {
         var sound = instruments[instrument][i].sample
         var value = instruments[instrument][i].value
         console.log("sound", instrument)
-        $scope.playPattern(value, sound, i, $scope.play, beat, measure)
+        $scope.playPatternSound(value, sound, i, $scope.play, beat)
+
       } //end for loop
     }
-  }
 
-  $scope.play = true
+  }
   $scope.stop = () => {
-    return $scope.play = false
+    clearInterval(intervalId)
+  }
+  $scope.play = function() {
+    console.log($scope.bpm)
+    let time = 60000 / $scope.bpm
+    let measure = time * 4
+    let beat = time / 4
+
+    intervalId = setInterval(() => {
+
+      $scope.loadPattern(beat)
+
+    }, measure)
+    console.log("intervalId", intervalId)
   }
 
 
-  //how do i start measure 2????
-  //
-  let count = 0
-  $scope.playPattern = function(value, sound, i,play,beat,measure) {
 
+
+  $scope.playPatternSound = function(value, sound, i, playValue, beat) {
     setTimeout(function() {
       if (value) {
         console.log("playing")
         sound.play() //play sound
       }
-      count = count + 1
     }, beat * i);
   }
 
-  let queue = []
 
-  // queue.push(setTimeout($scope.pattern, measure))
+
+
 
 
 
