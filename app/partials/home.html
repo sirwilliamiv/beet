@@ -1,5 +1,7 @@
 <h1 ng-click="sing()"> beet home</h1>
-<div ng-click="aquire()">Play</div>
+<input type="text" ng-model="bpm" placeholder="BPM">
+<div ng-click="loadPattern()">Play</div>
+<div ng-click="stop()">Stop</div>
 <ul ng-repeat="instrument in instruments">
   <li ng-repeat="beat in instrument track by $index">
     <input type="checkbox" id="test{{beat.name}}" ng-model="beat.value" />

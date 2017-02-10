@@ -28,7 +28,6 @@ app.controller('homeCtrl', function($http, $scope, $timeout, $interval) {
       //combine sample and  name
       // add 16 tracks per row
     for (var i = 0; i < grid; i++) {
-
       let track = {
           name: name + i,
           sample: sample
@@ -43,113 +42,47 @@ app.controller('homeCtrl', function($http, $scope, $timeout, $interval) {
 
   // } //end sing
 
-    //acquire sounds
-$scope.aquire = () => {
-      // var timing=  window.setInterval($scope.aquire,3200)
-
-      for (instrument in instruments) {
-
-        for (let i = 0; i < grid; i++) {
-          var sound = instruments[instrument][i].sample
-          var value = instruments[instrument][i].value
-          console.log("sound", instrument)
-          $scope.timeout(value, sound, i)
-
-        } //end for loop
-
-      }
+  //acquire sounds
+  $scope.loadPattern = () => {
+    console.log($scope.bpm)
+    let time = 60000 / $scope.bpm
+    let measure = time * 4
+    let beat = time / 4
+    for (instrument in instruments) {
+      for (let i = 0; i < grid; i++) {
+        var sound = instruments[instrument][i].sample
+        var value = instruments[instrument][i].value
+        console.log("sound", instrument)
+        $scope.playPattern(value, sound, i, $scope.play, beat, measure)
+      } //end for loop
     }
-    // test if  value is true
-  // $scope.play = (value, sound, i) => {
-  //       if (value) {
-  //        sound.play() //play sound
-  //         console.log("playing")
-  //       } else {}
-  // }
-  $scope.timeout= function(value,sound,i) {
-    setTimeout(function() {
-      if (value) {
-        sound.play() //play sound
-        console.log("i",i)
-        console.log("value",value)
-          // $timeout($scope.repeat, (400 * i))
-      }
-      console.log('calling timeout')
-      // $scope.timeout(value,sound,i);
-    }, 125 * i);
+  }
+
+  $scope.play = true
+  $scope.stop = () => {
+    return $scope.play = false
   }
 
 
-  // // test 3 FAIL
-  // $scope.play = () => {
-  //   for (instrument in instruments) {
-  //     $scope.playing = true
-  //     for (var i = 0; i < grid; i++) {
+  //how do i start measure 2????
+  //
+  let count = 0
+  $scope.playPattern = function(value, sound, i,play,beat,measure) {
 
-  //       let tempo = 200 * i
-  //       var sound = instruments[instrument][i].sample
-  //       var value = instruments[instrument][i].value
-  //         //test if  value is true
-  //       if (value) {
-  //         $timeout(function() {
-  //             sound.play() //play sound
-  //           }, tempo) // set time interval
-  //       } else {
-  //         $timeout(function() {}, tempo)
-  //       }
-  //     }
+    setTimeout(function() {
+      if (value) {
+        console.log("playing")
+        sound.play() //play sound
+      }
+      count = count + 1
+    }, beat * i);
+  }
 
-  //     $timeout($scope.play, 3200).flush() //
-  //   }
-  // }
-  // test1 --FAIL
-  // $scope.play = () => {
-  //   for (instrument in instruments) {
-  //     $scope.playing = true
-  //     for (var i = 0; i < grid; i++) {
+  let queue = []
 
-  //       let tempo = 200 * i
-  //       let sound = instruments[instrument][i].sample
-  //       let value = instruments[instrument][i].value
-  //         //test if  value is true
-  //       if (value) {
-  //          switch (instruments[instrument]) {
-
-  //            case 'kick':
-  //               sound.play()
-  //           break;
-  //            default:
-  //              instruments.hihat[0].sample.play()
-  //           break;
-  //         }
-
-  //        } else {
-  //         $timeout(function() {}, tempo)
-  //       }
-  //     }
-  //     $timeout($scope.play, 3200) //
-  //   }
-  // }
+  // queue.push(setTimeout($scope.pattern, measure))
 
 
-  // test 2--FAIL//writing loop by hand
-  // $scope.play = () => {
-  //   for(var i = 0; i < 2; i++){
 
-  //   instruments.kick[0].sample.play()
-  // }
-  // }
-  //mess with it
-
-  //   ///play the sound
-  // $scope.play = (beat) => {
-  //   //match beat to play
-  //   for (k in sounds) {
-  //     if (k === beat.name) {
-  //       beat.sample.play()
-  //     }
-  //   }
-  //   console.log("i should play sound from ", beat.name)
-  // }
 
 });
