@@ -1,7 +1,10 @@
 
-<h1 ng-click="sing()"> main Beet</h1>
+<h1 ng-click="newBeet()"> main Beet</h1>
+<br><br><br>
+<h1 ng-click="play(false)">SAVE!!!!!!!!</h1>
+<br><br><br>
 <input type="text" ng-model="bpm" placeholder="BPM">
-<div ng-click="play()">Play</div>
+<div ng-click="play(true)">Play</div>
 <br><br><br><br><br>
 <div ng-click="stop()">Stop</div>
 <ul ng-repeat="instrument in instruments">
