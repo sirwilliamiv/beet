@@ -18,10 +18,10 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
 
   $scope.newBeet = () => {
       let instruments = {
-          kick: [],
-          snare: [],
-          hihat: [],
-          openhihat: []
+          kick: {},
+          snare: {},
+          hihat: {},
+          openhihat: {}
         }
         //adding files to instruments object
       for (name in sounds) {
@@ -33,17 +33,19 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
           //combine sample and  name
           // add 16 tracks per row
         for (var i = 0; i < grid; i++) {
-          let track = {
+          // previously track
+          instruments[name][i] = {
               name: name + i,
               sample: sample,
               value: false
             }
             //add tracks to instruments object by name
-          instruments[name].push(track)
+            // instruments[name].push(track)
         } // end grid for loop
       } //end sounds for in loop
       console.log(instruments)
-        // return
+
+      // return
       return $scope.instruments = instruments
 
     } // end newBeet
@@ -65,36 +67,36 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
     }
     //play and establish timing
   $scope.play = function() {
-      console.log($scope.bpm)
-        //establish timing
-      let time = 60000 / $scope.bpm
-      let measure = time * 4
-      let bpm = time / 4
-        //grabbing return value ID of interval before firing pattern
-      intervalId = setInterval(() => {
-        $scope.loadPattern(bpm)
-      }, measure)
-      console.log("intervalId", intervalId)
+    console.log($scope.bpm)
+      //establish timing
+    let time = 60000 / $scope.bpm
+    let measure = time * 4
+    let bpm = time / 4
+      //grabbing return value ID of interval before firing pattern
+    intervalId = setInterval(() => {
+      $scope.loadPattern(bpm)
+    }, measure)
+    console.log("intervalId", intervalId)
+  }
+  $scope.playPatternSound = function(value, sound, i, playValue, bpm) {
+      setTimeout(function() {
+        if (value) {
+          console.log("playing")
+          sound.play() //play sound
+        }
+      }, bpm * i);
     }
-$scope.playPatternSound = function(value, sound, i, playValue, bpm) {
-  setTimeout(function() {
-    if (value) {
-      console.log("playing")
-      sound.play() //play sound
-    }
-  }, bpm * i);
-}
     //save pattern and convert to object
     //http://stackoverflow.com/questions/32002176/how-to-convert-array-to-object-in-javascript
-  // $scope.save = function() {
-  //   console.log("save")
-  //   debugger
-  //   let beetCopy = Object.assign({}, $scope.instruments)
-  //   let valueList = []
-  //     // THIS DOESNT WORK ****************
-  //     //LEARN WHAT THIS DOES http://stackoverflow.com/questions/4215737/convert-array-to-object
-  //   for (var i = 0; i < beetCopy.kick.length; i++) {
-  //     valueList.push(beetCopy.kick[i].value)
+    // $scope.save = function() {
+    //   console.log("save")
+    //   debugger
+    //   let beetCopy = Object.assign({}, $scope.instruments)
+    //   let valueList = []
+    //     // THIS DOESNT WORK ****************
+    //     //LEARN WHAT THIS DOES http://stackoverflow.com/questions/4215737/convert-array-to-object
+    //   for (var i = 0; i < beetCopy.kick.length; i++) {
+    //     valueList.push(beetCopy.kick[i].value)
 
   //   } // end for loop
 
@@ -109,27 +111,27 @@ $scope.playPatternSound = function(value, sound, i, playValue, bpm) {
   //   } //end toObject function
   // } //end save function
 
-    // *********************************************************
+  // *********************************************************
 
 
-//   let savedBeetForFB = toObject(beetCopy.kick)
-//   debugger
+  //   let savedBeetForFB = toObject(beetCopy.kick)
+  //   debugger
 
 
-//   // console.log("beetCopy", beetCopy)
-//   $scope.saveThisBeet(savedBeetForFB)
-//   debugger
-// }
+  //   // console.log("beetCopy", beetCopy)
+  //   $scope.saveThisBeet(savedBeetForFB)
+  //   debugger
+  // }
 
-// // send savedBeet to firebase
-// $scope.saveThisBeet = function(savedBeet) {
-//   $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
-// }
+  // // send savedBeet to firebase
+  // $scope.saveThisBeet = function(savedBeet) {
+  //   $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
+  // }
 
 
 
-// get from firebase object
-//http://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array
+  // get from firebase object
+  //http://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array
 
 
 });
