@@ -62,26 +62,25 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
   $scope.stop = () => {
       clearInterval(intervalId)
     }
-    //play
+//play and establish timing
   $scope.play = function(play) {
     console.log($scope.bpm)
         //establish timing
       let time = 60000 / $scope.bpm
       let measure = time * 4
       let bpm = time / 4
-        //interval before firing pattern
-      if(play){
+        //grabbing return value ID of interval before firing pattern
       intervalId = setInterval(() => {
-        $scope.loadPattern()
+        $scope.loadPattern(bpm)
       }, measure)
-    } else {
-      debugger
-      let savedBeet = Object.assign({}, $scope.instruments)
-      console.log("savedBeet", savedBeet)
-
-      $scope.saveThisBeet(savedBeet)
-    }
     console.log("intervalId", intervalId)
+  }
+//save pattern and convert to object
+//http://stackoverflow.com/questions/32002176/how-to-convert-array-to-object-in-javascript
+  $scope.save = function() {
+    let savedBeet = Object.assign({}, $scope.instruments)
+      console.log("savedBeet", savedBeet)
+      $scope.saveThisBeet(savedBeet)
   }
 
 
@@ -90,15 +89,17 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
       if (value) {
         console.log("playing")
         sound.play() //play sound
-
       }
     }, bpm * i);
   }
 
-  $scope.saveThisBeet = function(savedBeet) {
     // send savedBeet to firebase
-  }
+  $scope.saveThisBeet = function(savedBeet) {
+    $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`,JSON.stringify(savedBeet))
+    }
 
+// get from firebase object
+//http://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array
 
 
 });
