@@ -35,7 +35,8 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
         for (var i = 0; i < grid; i++) {
           let track = {
               name: name + i,
-              sample: sample
+              sample: sample,
+              value: false
             }
             //add tracks to instruments object by name
           instruments[name].push(track)
@@ -62,9 +63,9 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
   $scope.stop = () => {
       clearInterval(intervalId)
     }
-//play and establish timing
-  $scope.play = function(play) {
-    console.log($scope.bpm)
+    //play and establish timing
+  $scope.play = function() {
+      console.log($scope.bpm)
         //establish timing
       let time = 60000 / $scope.bpm
       let measure = time * 4
@@ -73,30 +74,59 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
       intervalId = setInterval(() => {
         $scope.loadPattern(bpm)
       }, measure)
-    console.log("intervalId", intervalId)
-  }
-//save pattern and convert to object
-//http://stackoverflow.com/questions/32002176/how-to-convert-array-to-object-in-javascript
-  $scope.save = function() {
-    let savedBeet = Object.assign({}, $scope.instruments)
-      console.log("savedBeet", savedBeet)
-      $scope.saveThisBeet(savedBeet)
-  }
-
-
-  $scope.playPatternSound = function(value, sound, i, playValue, bpm) {
-    setTimeout(function() {
-      if (value) {
-        console.log("playing")
-        sound.play() //play sound
-      }
-    }, bpm * i);
-  }
-
-    // send savedBeet to firebase
-  $scope.saveThisBeet = function(savedBeet) {
-    $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`,JSON.stringify(savedBeet))
+      console.log("intervalId", intervalId)
     }
+$scope.playPatternSound = function(value, sound, i, playValue, bpm) {
+  setTimeout(function() {
+    if (value) {
+      console.log("playing")
+      sound.play() //play sound
+    }
+  }, bpm * i);
+}
+    //save pattern and convert to object
+    //http://stackoverflow.com/questions/32002176/how-to-convert-array-to-object-in-javascript
+  // $scope.save = function() {
+  //   console.log("save")
+  //   debugger
+  //   let beetCopy = Object.assign({}, $scope.instruments)
+  //   let valueList = []
+  //     // THIS DOESNT WORK ****************
+  //     //LEARN WHAT THIS DOES http://stackoverflow.com/questions/4215737/convert-array-to-object
+  //   for (var i = 0; i < beetCopy.kick.length; i++) {
+  //     valueList.push(beetCopy.kick[i].value)
+
+  //   } // end for loop
+
+  //   //returns <-- array [true,false,false...etc ] length is 16
+  //   return function toObject(valueList) {
+  //     var rv = {};
+  //     for (var i = 0; i < valueList.length; ++i)
+  //       if (valueList[i] !== undefined) rv[i] = valueList[i];
+  //     debugger
+  //     console.log("rv",rv)
+  //     return rv; //object with 16 keys??
+  //   } //end toObject function
+  // } //end save function
+
+    // *********************************************************
+
+
+//   let savedBeetForFB = toObject(beetCopy.kick)
+//   debugger
+
+
+//   // console.log("beetCopy", beetCopy)
+//   $scope.saveThisBeet(savedBeetForFB)
+//   debugger
+// }
+
+// // send savedBeet to firebase
+// $scope.saveThisBeet = function(savedBeet) {
+//   $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
+// }
+
+
 
 // get from firebase object
 //http://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array
