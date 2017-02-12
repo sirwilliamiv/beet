@@ -26,7 +26,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
         //adding files to instruments object
       for (name in sounds) {
         let sample = new Howl({
-            // src: [`/assets/audio/beet/${sounds[name]}`],
+            src: [`/assets/audio/beet/${sounds[name]}`],
             volume: 0.8,
             html5: true
           })
@@ -91,11 +91,22 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
   $scope.save = function() {
     console.log("save")
     //*** NEED TO REMOVE SRC LINE FROM SAMPLE OBJECT BEFORE SENDING****
-debugger
-    // let beetCopy = Object.assign({}, $scope.instruments)
-    $scope.saveThisBeet($scope.instruments)
 
-  } //end save function
+      for(name in $scope.instruments){
+        for(var i = 0; i < grid; i++){
+          $scope.instruments[name][i].sample = null
+          $scope.instruments[name][i].UID = "hasdfqweri"
+          $scope.instruments[name][i].name = $scope.loopName
+          $scope.instruments[name][i].bpm = $scope.bpm
+
+          } //end for loop
+        } //end for in loop
+
+    $scope.saveThisBeet($scope.instruments)
+      } //end save function
+
+    // let beetCopy = Object.assign({}, $scope.instruments)
+
 
 
   // send savedBeet to firebase
