@@ -3,10 +3,10 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
   console.log("homeCtrl")
 
   const sounds = {
-    kick: 'BD.mp3',
-    snare: 'SN.mp3',
     hihat: 'HH.mp3',
-    openhihat: 'openHH.mp3'
+    kick: 'BD.mp3',
+    openhihat: 'openHH.mp3',
+    snare: 'SN.mp3'
   };
   const grid = 16;
   const song = 8;
@@ -18,10 +18,10 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
 
   $scope.newBeet = () => {
       let instruments = {
-          kick: {},
-          snare: {},
           hihat: {},
-          openhihat: {}
+          kick: {},
+          openhihat: {},
+          snare: {}
         }
         //adding files to instruments object
       for (name in sounds) {
