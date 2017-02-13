@@ -1,6 +1,10 @@
-app.controller('mainCtrl', function($http, $scope, $timeout, $interval,beetFactory) {
+app.controller('mainCtrl', function($http, $scope, $timeout, $interval,authFactory,beetFactory) {
 
   console.log("homeCtrl")
+  $scope.UID = authFactory.getUser().then((uid) => {
+
+  return uid
+  })
 
   const sounds = {
     hihat: 'HH.mp3',
@@ -128,15 +132,16 @@ debugger
 
       for(name in $scope.instruments){
         for(var i = 0; i < grid; i++){
+
           $scope.instruments[name][i].sample = ''
-          $scope.instruments[name][i].UID =  'LX0SZrDUY6PjELeDWiLhgjl3Xo03'
+          $scope.instruments[name][i].UID =  $scope.UID.$$state.value
           $scope.instruments[name][i].name = $scope.loopName
           $scope.instruments[name][i].bpm = $scope.bpm
 
           } //end for loop
         } //end for in loop
 
-    $scope.saveThisBeet($scope.instruments,'LX0SZrDUY6PjELeDWiLhgjl3Xo03')
+    $scope.saveThisBeet($scope.instruments,$scope.UID.$$state.value)
       } //end save function
 
     // let beetCopy = Object.assign({}, $scope.instruments)

@@ -15,7 +15,8 @@ app.factory('authFactory', ($q) => {
         const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
           unsubscribe();
           if (user) {
-            resolve(user);
+
+            resolve(user.uid);
           } else {
             reject("Not logged in");
           }
