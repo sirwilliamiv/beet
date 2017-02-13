@@ -7,10 +7,12 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   })
 
   const sounds = {
-    hihat: 'HH.mp3',
-    kick: 'BD.mp3',
-    openhihat: 'openHH.mp3',
-    snare: 'SN.mp3'
+
+      hihat: 'HH.mp3',
+      kick: 'BD.mp3',
+      openhihat: 'openHH.mp3',
+      snare: 'SN.mp3'
+
   };
   const grid = 16;
   const song = 8;
@@ -22,31 +24,34 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
   $scope.newBeet = () => {
       let instruments = {
-          hihat: {},
-          kick: {},
-          openhihat: {},
-          snare: {}
+
+            hihat: {},
+            kick: {},
+            openhihat: {},
+            snare: {}
+
         }
         //adding files to instruments object
       for (name in sounds) {
+        // for (name in sounds[hits]) {
 
-        let sample = new Howl({
-            src: [`/assets/audio/beet/${sounds[name]}`],
-            volume: 0.8,
-            html5: true
-          })
-          //combine sample and  name
-          // add 16 tracks per row
-        for (var i = 0; i < grid; i++) {
-          // previously track
-          instruments[name][i] = {
+          let sample = new Howl({
+              src: [`/assets/audio/beet/${sounds[name]}`],
+              volume: 0.8,
+              html5: true
+            })
+            //combine sample and  name
+            // add 16 tracks per row
+          for (var i = 0; i < grid; i++) {
+
+            // previously track
+            instruments[name][i] = {
               name: name + i,
               sample: sample,
               value: false
             }
-            //add tracks to instruments object by name
-            // instruments[name].push(track)
-        } // end grid for loop
+          } // end grid for loop
+        // } // end name in sounds[hits] loop
       } //end sounds for in loop
       console.log(instruments)
 
@@ -58,23 +63,21 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
   ///saved
   $scope.savedToPlay = (savedBeet) => {
-
       //adding files to instruments object
       for (key in savedBeet) {
         for (name in savedBeet[key]) {
           // add 16 tracks per row
           for (var i = 0; i < grid; i++) {
+
             let sample = new Howl({
-              src: [`/assets/audio/beet/${sounds[name]}`],
+              src: [`/assets/audio/beet/${key}+".mp3"`],
               volume: 0.8,
               html5: true
             })
-
-
             savedBeet[key][name][i] = {
               sample: sample,
-              value: savedBeet[key][name][i].value,
-              bpm: savedBeet[key][name][i].bpm
+              value: savedBeet[key][name].value,
+              bpm: savedBeet[key][name].bpm
             }
           } // end grid for loop
         } //end for in loop --name in key
@@ -92,6 +95,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
         for (let i = 0; i < grid; i++) {
           var sound = $scope.instruments[instrument][i].sample
           var value = $scope.instruments[instrument][i].value
+          debugger
           console.log("sound", instrument)
           $scope.playPatternSound(value, sound, i, $scope.play, bpm)
         } //end for loop
@@ -153,7 +157,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   }
 
   $scope.loadPattern = function() {
-    beetFactory.load()
+    beetFactory.load('-Kct9ztod7IdYbaZSUkM')
       // $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
       .then((userBeets) => {
 

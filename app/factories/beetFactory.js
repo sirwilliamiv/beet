@@ -10,8 +10,8 @@ app.factory('beetFactory', ($q,authFactory, $http, $location) => {
         })
     },
 
-    load: () => {
-      return $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
+    load: (id) => {
+      return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${id}.json`)
         .then((res) => {
           return res.data
         })
