@@ -1,9 +1,9 @@
-app.controller('mainCtrl', function($http, $scope, $timeout, $interval,authFactory,beetFactory) {
+app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory) {
 
   console.log("homeCtrl")
   $scope.UID = authFactory.getUser().then((uid) => {
 
-  return uid
+    return uid
   })
 
   const sounds = {
@@ -56,32 +56,31 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval,authFacto
     } // end newBeet
 
 
-///saved
-    $scope.savedToPlay = (savedBeet) => {
+  ///saved
+  $scope.savedToPlay = (savedBeet) => {
 
-        //adding files to instruments object
+      //adding files to instruments object
       for (key in savedBeet) {
-        for(name in key) {
-        console.log("savedBeet", savedBeet)
-        // let sample = new Howl({
-        //     src: [`/assets/audio/beet/${savedBeet[name]}`],
-        //     volume: 0.8,
-        //     html5: true
-        //   })
-          //combine sample and  name
+        for (name in savedBeet[key]) {
           // add 16 tracks per row
-        // for (var i = 0; i < grid; i++) {
-          debugger
-          savedBeet[name] = {
+          for (var i = 0; i < grid; i++) {
+            let sample = new Howl({
+              src: [`/assets/audio/beet/${sounds[name]}`],
+              volume: 0.8,
+              html5: true
+            })
+
+
+            savedBeet[key][name][i] = {
               sample: sample,
-              value: [name].value,
-              bpm: [name].bpm
+              value: savedBeet[key][name][i].value,
+              bpm: savedBeet[key][name][i].bpm
             }
-        //} // end grid for loop
-      }//end for in loop --name in key
+          } // end grid for loop
+        } //end for in loop --name in key
       } //end sounds for in loop key in savedBeet
       console.log(savedBeet)
-debugger
+
       // return
       return $scope.instruments = savedBeet
 
@@ -127,44 +126,59 @@ debugger
     //save pattern and convert to object
 
   $scope.save = function() {
-    console.log("save")
-    //*** NEED TO REMOVE SRC LINE FROM SAMPLE OBJECT BEFORE SENDING****
+      console.log("save")
+        //*** NEED TO REMOVE SRC LINE FROM SAMPLE OBJECT BEFORE SENDING****
 
-      for(name in $scope.instruments){
-        for(var i = 0; i < grid; i++){
+      for (name in $scope.instruments) {
+        for (var i = 0; i < grid; i++) {
 
           $scope.instruments[name][i].sample = ''
-          $scope.instruments[name][i].UID =  $scope.UID.$$state.value
+          $scope.instruments[name][i].UID = $scope.UID.$$state.value
           $scope.instruments[name][i].name = $scope.loopName
           $scope.instruments[name][i].bpm = $scope.bpm
 
-          } //end for loop
-        } //end for in loop
+        } //end for loop
+      } //end for in loop
 
-    $scope.saveThisBeet($scope.instruments,$scope.UID.$$state.value)
-      } //end save function
+      $scope.saveThisBeet($scope.instruments, $scope.UID.$$state.value)
+    } //end save function
 
-    // let beetCopy = Object.assign({}, $scope.instruments)
+  // let beetCopy = Object.assign({}, $scope.instruments)
 
-    $scope.saveThisBeet = (savedBeet,UID) => {
-      beetFactory.save(savedBeet,UID)
-    }
+  $scope.saveThisBeet = (savedBeet, UID) => {
+    beetFactory.save(savedBeet, UID).then((res) => {
 
-  // $scope.loadPattern = function() {
-  //   $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
-  //   .then((allSavedBeets)=> {
+      $scope.beetUID = res
+    })
+  }
 
-  //     $scope.userBeets = allSavedBeets.data
-  //     debugger
-  //     $scope.savedToPlay($scope.userBeets)
-  //   })
-  // }
+  $scope.loadPattern = function() {
+    beetFactory.load()
+      // $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
+      .then((userBeets) => {
+
+        $scope.userBeets = userBeets //  = allSavedBeets.data
+        $scope.savedToPlay($scope.userBeets)
+      })
+
+
+    // .then((data)=> {
+    //   console.log("data", data)
+
+    // })
+
+
+
+
+  }
+
+  //
 
 
 
   // get from firebase object
   //http://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array
-// users > add saved beet id to object
-//   post beet to firebase .then(beetid) => patch beetid to users UID
+  // users > add saved beet id to object
+  //   post beet to firebase .then(beetid) => patch beetid to users UID
 
 });
