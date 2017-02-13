@@ -95,7 +95,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
       for(name in $scope.instruments){
         for(var i = 0; i < grid; i++){
           $scope.instruments[name][i].sample = null
-          $scope.instruments[name][i].UID = "hasdfqweri"
+          $scope.instruments[name][i].UID =  'LX0SZrDUY6PjELeDWiLhgjl3Xo03'
           $scope.instruments[name][i].name = $scope.loopName
           $scope.instruments[name][i].bpm = $scope.bpm
 
@@ -112,6 +112,14 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
   // send savedBeet to firebase
   $scope.saveThisBeet = function(savedBeet) {
     $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
+  }
+
+  $scope.loadPattern = function() {
+    $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
+    .then((allSavedBeets)=> {
+      $scope.userBeets = allSavedBeets.data
+      debugger
+    })
   }
 
 
