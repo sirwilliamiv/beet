@@ -1,4 +1,4 @@
-app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
+app.controller('mainCtrl', function($http, $scope, $timeout, $interval,beetFactory) {
 
   console.log("homeCtrl")
 
@@ -25,6 +25,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
         }
         //adding files to instruments object
       for (name in sounds) {
+
         let sample = new Howl({
             src: [`/assets/audio/beet/${sounds[name]}`],
             volume: 0.8,
@@ -50,6 +51,38 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
 
     } // end newBeet
 
+
+///saved
+    $scope.savedToPlay = (savedBeet) => {
+
+        //adding files to instruments object
+      for (key in savedBeet) {
+        for(name in key) {
+        console.log("savedBeet", savedBeet)
+        // let sample = new Howl({
+        //     src: [`/assets/audio/beet/${savedBeet[name]}`],
+        //     volume: 0.8,
+        //     html5: true
+        //   })
+          //combine sample and  name
+          // add 16 tracks per row
+        // for (var i = 0; i < grid; i++) {
+          debugger
+          savedBeet[name] = {
+              sample: sample,
+              value: [name].value,
+              bpm: [name].bpm
+            }
+        //} // end grid for loop
+      }//end for in loop --name in key
+      } //end sounds for in loop key in savedBeet
+      console.log(savedBeet)
+debugger
+      // return
+      return $scope.instruments = savedBeet
+
+    } // end savedBeets
+
   //acquire sounds
   $scope.loadPattern = (bpm) => {
       for (instrument in $scope.instruments) {
@@ -74,6 +107,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
     let bpm = time / 4
       //grabbing return value ID of interval before firing pattern
     intervalId = setInterval(() => {
+      // let bpm = instruments.hihat.0.bpm
       $scope.loadPattern(bpm)
     }, measure)
     console.log("intervalId", intervalId)
@@ -94,7 +128,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
 
       for(name in $scope.instruments){
         for(var i = 0; i < grid; i++){
-          $scope.instruments[name][i].sample = null
+          $scope.instruments[name][i].sample = ''
           $scope.instruments[name][i].UID =  'LX0SZrDUY6PjELeDWiLhgjl3Xo03'
           $scope.instruments[name][i].name = $scope.loopName
           $scope.instruments[name][i].bpm = $scope.bpm
@@ -102,30 +136,39 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval) {
           } //end for loop
         } //end for in loop
 
-    $scope.saveThisBeet($scope.instruments)
+    $scope.saveThisBeet($scope.instruments,'LX0SZrDUY6PjELeDWiLhgjl3Xo03')
       } //end save function
 
     // let beetCopy = Object.assign({}, $scope.instruments)
 
-
+    $scope.saveThisBeet = (savedBeet,UID) => {
+      beetFactory.save(savedBeet,UID)
+    }
 
   // send savedBeet to firebase
-  $scope.saveThisBeet = function(savedBeet) {
-    $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
-  }
+  // $scope.saveThisBeet = function(savedBeet,UID) {
+  //   $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
+  //   .then((beetid) => {
+  //     let beetGarden = {name: beetid.name}
+  //     $http.patch(`https://beet-35be8.firebaseio.com/Users/${UID}.json`, beetGarden)
+  //   })
+  // }
 
-  $scope.loadPattern = function() {
-    $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
-    .then((allSavedBeets)=> {
-      $scope.userBeets = allSavedBeets.data
-      debugger
-    })
-  }
+  // $scope.loadPattern = function() {
+  //   $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
+  //   .then((allSavedBeets)=> {
+
+  //     $scope.userBeets = allSavedBeets.data
+  //     debugger
+  //     $scope.savedToPlay($scope.userBeets)
+  //   })
+  // }
 
 
 
   // get from firebase object
   //http://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array
-
+// users > add saved beet id to object
+//   post beet to firebase .then(beetid) => patch beetid to users UID
 
 });
