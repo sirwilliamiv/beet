@@ -4,8 +4,8 @@ app.factory('beetFactory', ($q,authFactory, $http, $location) => {
       $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
         .then((beetid) => {
 
-          let beetGarden = { name: beetid.data.name }
-          $http.patch(`https://beet-35be8.firebaseio.com/Users/${UID}.json`, beetGarden)
+          let beetGarden = { beet: beetid.data.name }
+          $http.post(`https://beet-35be8.firebaseio.com/Users/${UID}/beets.json`, beetGarden)
         })
     },
 

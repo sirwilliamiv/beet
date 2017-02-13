@@ -150,15 +150,6 @@ debugger
       beetFactory.save(savedBeet,UID)
     }
 
-  // send savedBeet to firebase
-  // $scope.saveThisBeet = function(savedBeet,UID) {
-  //   $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
-  //   .then((beetid) => {
-  //     let beetGarden = {name: beetid.name}
-  //     $http.patch(`https://beet-35be8.firebaseio.com/Users/${UID}.json`, beetGarden)
-  //   })
-  // }
-
   // $scope.loadPattern = function() {
   //   $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
   //   .then((allSavedBeets)=> {
