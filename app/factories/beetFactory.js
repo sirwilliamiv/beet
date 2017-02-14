@@ -13,6 +13,7 @@ app.factory('beetFactory', ($q,authFactory, $http, $location) => {
     load: (id) => {
       return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${id}.json`)
         .then((res) => {
+          debugger
           return res.data
         })
     }

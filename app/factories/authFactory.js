@@ -16,7 +16,7 @@ app.factory('authFactory', ($q) => {
           unsubscribe();
           if (user) {
 
-            resolve(user.uid);
+             return resolve(user.uid);
           } else {
             reject("Not logged in");
           }
