@@ -16,8 +16,11 @@ console.log("beetgarden")
 // })
 
 // console.log("$scope.uid", $scope.UID.$$state.value)
-$scope.delete = ()=> {
-
+$scope.delete = (id)=> {
+ return $http.delete(`https://beet-35be8.firebaseio.com/userBeets/${id}.json`)
+ .then((res) => {
+  $scope.apply
+ })
 }
 
 $scope.loading= () => {
