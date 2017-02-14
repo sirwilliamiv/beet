@@ -11,12 +11,16 @@ app.factory('beetFactory', ($q, authFactory, $http, $location) => {
     },
 
     load: (id) => {
-      return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${id}.json`)
-        .then((res) => {
-
-          return res.data
+      authFactory.getUser().then((res) => {
+        debugger
+          return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${res}.json`)
+            // .then((res) => {
+            //   debugger
+            //   return res.data
+            // })
         })
     },
+
     delete: (id) => {
       return $http.delete(`https://beet-35be8.firebaseio.com/userBeets/${id}.json`)
         .then((res) => {

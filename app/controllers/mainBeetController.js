@@ -128,28 +128,35 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
     let instruments = angular.copy($scope.instruments)
     // let instruments_ = Object.assign({}, $scope.instruments)
+       let user = {}
+          user.UID = $scope.UID
+          user.name = $scope.loopName
+          user.bpm = $scope.bpm
+          user.instruments = {}
       console.log("save")
       for (name in instruments) {
+        user.instruments[name] = {}
+
         for (var i = 0; i < grid; i++) {
+          if (instruments[name][i].value) {
+            user.instruments[name][i] = instruments[name][i].value
+          }
 //firebase : howler src is an array, reset to empty string to be accepted
-          instruments[name][i].sample = ''
-          instruments[name][i].UID = $scope.UID // .$$state.value
-          instruments[name][i].name = $scope.loopName
-          instruments[name][i].bpm = $scope.bpm
+          // user.instruments[name][i] = instruments[name][i].value
+            // instruments[name][i].sample =''
 
         } //end for loop
       } //end for in loop
-
-      // $scope.saveThisBeet(instruments, $scope.UID) // .$$state.value)
-
-      beetFactory.save(instruments, $scope.UID).then((res) => {
+      // debugger
+      beetFactory.save(user).then((res) => {
+        //last beet saved
           $scope.beetUID = res
         })
     } //end save function
 
-
+//loads last saved beet
   $scope.loadFB = function() {
-    beetFactory.load('-KcxZE1J0pt1dmctXHXw').then((userBeets) => {
+    beetFactory.load($scope.beetUID).then((userBeets) => {
         console.log("loading?")
         $scope.savedToPlay(userBeets)
 
