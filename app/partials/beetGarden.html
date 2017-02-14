@@ -1,1 +1,19 @@
 <h1>beetGarden</h1>
+
+<div >
+ <div class="row" ng-repeat="pattern in userBeets">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{pattern[0].name}}</span>
+              <p>{{pattern[0].name}}</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Delete This Beet</a>
+              <a href="#">Play This Beet</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>

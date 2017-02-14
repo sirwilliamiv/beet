@@ -75,6 +75,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
               html5: true
             })
             savedBeet[key][name][i] = {
+              name:  savedBeet[key][name].name + i,
               sample: sample,
               value: savedBeet[key][name].value,
               bpm: savedBeet[key][name].bpm
@@ -170,8 +171,10 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
     //   console.log("data", data)
 
     // })
-
-
+///
+// i need to be able to select from a list of saved beets
+// -grab beetid
+// -call loadPattern(beetid)
 
 
   }
