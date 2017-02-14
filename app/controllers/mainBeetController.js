@@ -54,16 +54,15 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   $scope.savedToPlay = (savedBeet) => {
 
       //adding files to instruments object
-      for (key in savedBeet) {
-        // for (name in savedBeet[key]) {
+      for (key in sounds) {
           // add 16 tracks per row
           for (var i = 0; i < grid; i++) {
-
             let sample = new Howl({
-              src: [`/assets/audio/beet/${key}+".mp3"`],
+              src: [`/assets/audio/beet/${sounds[key]}`],
               volume: 0.8,
               html5: true
             })
+
             savedBeet[key][i] = {
               name: "name"+ i,
               sample: sample,
@@ -71,7 +70,6 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
               bpm: savedBeet[key][i].bpm
             }
           } // end grid for loop
-        // } //end for in loop --name in key
       } //end sounds for in loop key in savedBeet
       console.log(savedBeet)
 
