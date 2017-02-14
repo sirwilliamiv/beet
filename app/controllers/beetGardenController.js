@@ -1,5 +1,7 @@
-app.controller('beetGardenCtrl', function($scope,$http,authFactory, beetFactory,posts) {
+app.controller('beetGardenCtrl', function($scope,beets,$http,authFactory, beetFactory) {
 console.log("beetgarden")
+console.log('beets', beets)
+$scope.userBeets = beets
 
 // $scope.UID = authFactory.getUser()
 // .then((res) => {
@@ -25,17 +27,8 @@ beetFactory.delete(id)
 
 }
 
-$scope.loading= () => {
-  authFactory.getUser()
-  .then((res) =>{
-    debugger
-   return uid = res
-  }).then((uid) => {
-    beetFactory.load(uid)
-  }).then((res) => {
-  return $scope.userBeets = res
-})
-
+$scope.loading = () => {
+ $scope.userBeets = beetFactory.load()
 }
 
 });

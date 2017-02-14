@@ -32,7 +32,7 @@ app.config(($routeProvider, $locationProvider) => {
             controller: 'beetGardenCtrl',
             templateUrl: '/partials/beetGarden.html',
             resolve: {
-              posts(beetFactory) {
+              beets(beetFactory) {
                 return beetFactory.load()
               },
               user(authFactory, $location) {
