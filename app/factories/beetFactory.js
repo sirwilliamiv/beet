@@ -1,7 +1,7 @@
-app.factory('beetFactory', ($q,authFactory, $http, $location) => {
+app.factory('beetFactory', ($q, authFactory, $http, $location) => {
   return {
-    save:  (savedBeet, UID) => {
-       return $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, JSON.stringify(savedBeet))
+    save: (savedBeet, UID) => {
+      return $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, savedBeet)
         .then((beetid) => {
 
           let beetGarden = { beet: beetid.data.name }
@@ -16,6 +16,13 @@ app.factory('beetFactory', ($q,authFactory, $http, $location) => {
 
           return res.data
         })
+    },
+    delete: (id) => {
+      return $http.delete(`https://beet-35be8.firebaseio.com/userBeets/${id}.json`)
+        .then((res) => {
+
+        })
+
     }
   } // end return  object
 

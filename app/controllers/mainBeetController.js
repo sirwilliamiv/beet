@@ -1,49 +1,40 @@
 app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory) {
 
   console.log("homeCtrl")
-  $scope.UID = authFactory.getUser().then((uid) => {
-
-    return uid
+  authFactory.getUser().then((uid) => {
+    $scope.UID = uid
   })
 
   const sounds = {
-
       hihat: 'HH.mp3',
       kick: 'BD.mp3',
       openhihat: 'openHH.mp3',
       snare: 'SN.mp3'
-
   };
+
   const grid = 16;
-  const song = 8;
-  $scope.bpm = 90
-
   let intervalId = 0; // becomes the setInterval id
+  $scope.bpm = 90
+  $scope.playing = false
 
 
-
+//fresh beet
   $scope.newBeet = () => {
       let instruments = {
-
             hihat: {},
             kick: {},
             openhihat: {},
             snare: {}
-
         }
         //adding files to instruments object
       for (name in sounds) {
         // for (name in sounds[hits]) {
-
           let sample = new Howl({
               src: [`/assets/audio/beet/${sounds[name]}`],
               volume: 0.8,
               html5: true
             })
-            //combine sample and  name
-            // add 16 tracks per row
           for (var i = 0; i < grid; i++) {
-
             // previously track
             instruments[name][i] = {
               name: name + i,
@@ -54,10 +45,8 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
         // } // end name in sounds[hits] loop
       } //end sounds for in loop
       console.log(instruments)
-
       // return
       return $scope.instruments = instruments
-
     } // end newBeet
 
 
@@ -90,24 +79,11 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
     } // end savedBeets
 
-  //acquire sounds
-  $scope.loadPattern = (bpm) => {
-      for (instrument in $scope.instruments) {
-        for (let i = 0; i < grid; i++) {
-          var sound = $scope.instruments[instrument][i].sample
-          var value = $scope.instruments[instrument][i].value
-          debugger
-          console.log("sound", instrument)
-          $scope.playPatternSound(value, sound, i, $scope.play, bpm)
-        } //end for loop
-      } //end for in loop
-    } //end loadPattern
-    //stop
-  $scope.stop = () => {
-      clearInterval(intervalId)
-    }
-    //play and establish timing
+
+
+    //1. play and establish timing
   $scope.play = function() {
+    $scope.playing = true
     console.log($scope.bpm)
       //establish timing
     let time = 60000 / $scope.bpm
@@ -120,6 +96,18 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
     }, measure)
     console.log("intervalId", intervalId)
   }
+    //2. acquire sounds
+  $scope.loadPattern = (bpm) => {
+      for (instrument in $scope.instruments) {
+        for (let i = 0; i < grid; i++) {
+          var sound = $scope.instruments[instrument][i].sample
+          var value = $scope.instruments[instrument][i].value
+          console.log("sound", instrument)
+          $scope.playPatternSound(value, sound, i, $scope.play, bpm)
+        } //end for loop
+      } //end for in loop
+    } //end loadPattern
+//3. play sound
   $scope.playPatternSound = function(value, sound, i, playValue, bpm) {
       setTimeout(function() {
         if (value) {
@@ -128,56 +116,57 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
         }
       }, bpm * i);
     }
+
+       //stop
+  $scope.stop = () => {
+      clearInterval(intervalId)
+      $scope.playing = false
+    }
+
     //save pattern and convert to object
 
   $scope.save = function() {
+    debugger
+    let instruments = angular.copy($scope.instruments)
+    // let instruments_ = Object.assign({}, $scope.instruments)
       console.log("save")
-        //*** NEED TO REMOVE SRC LINE FROM SAMPLE OBJECT BEFORE SENDING****
-
-      for (name in $scope.instruments) {
+      for (name in instruments) {
         for (var i = 0; i < grid; i++) {
-
-          $scope.instruments[name][i].sample = ''
-          $scope.instruments[name][i].UID = $scope.UID.$$state.value
-          $scope.instruments[name][i].name = $scope.loopName
-          $scope.instruments[name][i].bpm = $scope.bpm
+//firebase : howler src is an array, reset to empty string to be accepted
+          instruments[name][i].sample = ''
+          instruments[name][i].UID = $scope.UID // .$$state.value
+          instruments[name][i].name = $scope.loopName
+          instruments[name][i].bpm = $scope.bpm
 
         } //end for loop
       } //end for in loop
 
-      $scope.saveThisBeet($scope.instruments, $scope.UID.$$state.value)
+      // $scope.saveThisBeet(instruments, $scope.UID) // .$$state.value)
+      beetFactory.save(instruments, $scope.UID)
+        .then((res) => {
+          $scope.beetUID = res
+        })
+      // if($scope.playing) {
+      //   $scope.savedToPlay(instruments)
+
+      // }
     } //end save function
 
-  // let beetCopy = Object.assign({}, $scope.instruments)
-
-  $scope.saveThisBeet = (savedBeet, UID) => {
-    beetFactory.save(savedBeet, UID).then((res) => {
-
-      $scope.beetUID = res
-    })
-  }
-
-  $scope.loadPattern = function() {
-    beetFactory.load('-Kct9ztod7IdYbaZSUkM')
-      // $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
-      .then((userBeets) => {
-
-        $scope.userBeets = userBeets //  = allSavedBeets.data
-        $scope.savedToPlay($scope.userBeets)
-      })
 
 
-    // .then((data)=> {
-    //   console.log("data", data)
+  // $scope.loadPattern = function() {
+  //   beetFactory.load('-Kct9ztod7IdYbaZSUkM')
+  //     // $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
+  //     .then((userBeets) => {
 
-    // })
-///
-// i need to be able to select from a list of saved beets
-// -grab beetid
-// -call loadPattern(beetid)
+  //       $scope.userBeets = userBeets //  = allSavedBeets.data
+  //      ********** $scope.savedToPlay($scope.userBeets)
+  //     })
 
 
-  }
+
+
+
 
   //
 
