@@ -52,9 +52,10 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
   ///saved
   $scope.savedToPlay = (savedBeet) => {
+
       //adding files to instruments object
       for (key in savedBeet) {
-        for (name in savedBeet[key]) {
+        // for (name in savedBeet[key]) {
           // add 16 tracks per row
           for (var i = 0; i < grid; i++) {
 
@@ -63,14 +64,14 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
               volume: 0.8,
               html5: true
             })
-            savedBeet[key][name][i] = {
-              name:  savedBeet[key][name].name + i,
+            savedBeet[key][i] = {
+              name: "name"+ i,
               sample: sample,
-              value: savedBeet[key][name].value,
-              bpm: savedBeet[key][name].bpm
+              value: savedBeet[key][i].value,
+              bpm: savedBeet[key][i].bpm
             }
           } // end grid for loop
-        } //end for in loop --name in key
+        // } //end for in loop --name in key
       } //end sounds for in loop key in savedBeet
       console.log(savedBeet)
 
@@ -126,7 +127,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
     //save pattern and convert to object
 
   $scope.save = function() {
-    debugger
+
     let instruments = angular.copy($scope.instruments)
     // let instruments_ = Object.assign({}, $scope.instruments)
       console.log("save")
@@ -142,39 +143,21 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       } //end for in loop
 
       // $scope.saveThisBeet(instruments, $scope.UID) // .$$state.value)
-      beetFactory.save(instruments, $scope.UID)
-        .then((res) => {
+
+      beetFactory.save(instruments, $scope.UID).then((res) => {
           $scope.beetUID = res
         })
-      // if($scope.playing) {
-      //   $scope.savedToPlay(instruments)
-
-      // }
     } //end save function
 
 
+  $scope.loadFB = function() {
+    beetFactory.load('-KcxZE1J0pt1dmctXHXw').then((userBeets) => {
+        console.log("loading?")
+        $scope.savedToPlay(userBeets)
 
-  // $scope.loadPattern = function() {
-  //   beetFactory.load('-Kct9ztod7IdYbaZSUkM')
+      })
+    }
   //     // $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
-  //     .then((userBeets) => {
 
-  //       $scope.userBeets = userBeets //  = allSavedBeets.data
-  //      ********** $scope.savedToPlay($scope.userBeets)
-  //     })
-
-
-
-
-
-
-  //
-
-
-
-  // get from firebase object
-  //http://stackoverflow.com/questions/6857468/converting-a-js-object-to-an-array
-  // users > add saved beet id to object
-  //   post beet to firebase .then(beetid) => patch beetid to users UID
 
 });
