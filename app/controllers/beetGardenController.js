@@ -1,34 +1,22 @@
-app.controller('beetGardenCtrl', function($scope,beets,$http,authFactory, beetFactory) {
-console.log("beetgarden")
-console.log('beets', beets)
-$scope.userBeets = beets
+app.controller('beetGardenCtrl', function($scope,$location, beets, $http, authFactory, beetFactory) {
+  console.log("beetgarden")
+  console.log('beets', beets)
+  $scope.userBeets = beets
 
-// $scope.UID = authFactory.getUser()
-// .then((res) => {
-//   console.log("res", res.value)
-//   debugger
-//   let uid = res
-//   return  (uid) => {
 
-//     $beetFactory.load(uid)
-//     .then((res) => {
-//       console.log("what is this?", res)
-//     })
-//   }
-// })
+  $scope.delete = (id) => {
+    beetFactory.delete(id)
+      .then((res) => {
+        console.log("what is this", res)
+      })
 
-// console.log("$scope.uid", $scope.UID.$$state.value)
-$scope.delete = (id)=> {
-debugger
-beetFactory.delete(id)
-.then((res) => {
-  console.log("what is this", res)
-})
+  }
+  $scope.playThisBeet = (beetid) => {
+   $location.url(`/main/${beetid}`)
+  }
 
-}
-
-$scope.loading = () => {
- $scope.userBeets = beetFactory.load()
-}
+  // $scope.loading = () => {
+  //  $scope.userBeets = beetFactory.load()
+  // }
 
 });

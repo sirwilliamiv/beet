@@ -12,7 +12,21 @@ app.config(($routeProvider, $locationProvider) => {
 
       $locationProvider.hashPrefix('!')
       $routeProvider
-        .when('/home', {
+        .when('/main/:beet', {
+          controller: 'mainCtrl',
+          templateUrl: '/partials/mainBeet.html',
+          resolve: {
+            beetPlay(beetFactory, $route) {
+              return beetFactory.getThisBeet($route.current.params.beet)
+            },
+             user(authFactory, $location) {
+                return authFactory.getUser().catch(() => {
+                  $location.url('/main')
+                  console.log('not logged in')
+                })
+              }
+          }
+        }).when('/home', {
           controller: 'homeCtrl',
           templateUrl: '/partials/home.html'
         })

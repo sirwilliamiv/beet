@@ -1,5 +1,5 @@
 app.factory('beetFactory', ($q, authFactory, $http, $location) => {
-  let UID =""
+  let UID = ""
   return {
     save: (savedBeet, UID) => {
       return $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, savedBeet)
@@ -14,26 +14,22 @@ app.factory('beetFactory', ($q, authFactory, $http, $location) => {
     load: () => {
       return authFactory.getUser().then((res) => {
 
-         UID = res
-          return $http.get(`https://beet-35be8.firebaseio.com/userBeets/.json`)
-          .then((allBeets)=> {
+        UID = res
+        return $http.get(`https://beet-35be8.firebaseio.com/userBeets/.json`)
+          .then((allBeets) => {
             console.log("uid", UID)
             let userBeets = {}
-            for(beet in allBeets.data) {
+            for (beet in allBeets.data) {
 
-              if(allBeets.data[beet].UID === UID){
-                  userBeets[beet] = allBeets.data[beet]
-                  userBeets[beet].beetID = [beet]
+              if (allBeets.data[beet].UID === UID) {
+                userBeets[beet] = allBeets.data[beet]
+                userBeets[beet].beetID = [beet]
               }
             }
-                  console.log("userBeets", userBeets)
-              return userBeets
+            console.log("userBeets", userBeets)
+            return userBeets
           })
-            // .then((res) => {
-            //   debugger
-            //   return res.data
-            // })
-        })
+      })
     },
 
     delete: (id) => {
@@ -42,7 +38,14 @@ app.factory('beetFactory', ($q, authFactory, $http, $location) => {
 
         })
 
-    }
+    },
+  getThisBeet: (beetid) => {
+    return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${beetid}.json`)
+    .then((res)=> {
+      instruments = res.data.instruments
+
+    })
+  }
   } // end return  object
 
 });
