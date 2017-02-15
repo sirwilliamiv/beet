@@ -39,13 +39,16 @@ app.factory('beetFactory', ($q, authFactory, $http, $location) => {
         })
 
     },
-  getThisBeet: (beetid) => {
-    return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${beetid}.json`)
-    .then((res)=> {
-      instruments = res.data.instruments
+    getThisBeet: (beetid) => {
+      return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${beetid}.json`)
+        .then((res) => {
 
-    })
-  }
+          bpm = res.data.bpm
+          instruments = res.data.instruments
+
+
+        })
+    }
   } // end return  object
 
 });

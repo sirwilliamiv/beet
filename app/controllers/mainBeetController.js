@@ -41,6 +41,81 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   $scope.playing = false
 
 
+
+
+// $scope.beetFromGarden = instruments
+  ///saved
+  $scope.savedToPlay = (instruments, bpm) => {
+      $scope.bpm = bpm
+      //adding files to instruments object
+      for (key in samples) {
+        // add 16 tracks per row
+        for (var i = 0; i < grid; i++) {
+          // let sample = new Howl({
+          //   src: [`/assets/audio/beet/${sounds[key]}`],
+          //   volume: 0.8,
+          //   html5: true
+          // })
+debugger
+          instruments[key][i] = {
+            name: "name" + i,
+            // sample: sample,
+            value: instruments[key][i] || false,
+            // bpm: instruments[key][i].bpm
+          }
+        } // end grid for loop
+      } //end sounds for in loop key in instruments
+      console.log(instruments)
+debugger
+      // return
+      return $scope.instruments = instruments
+
+    } // end savedBeets
+
+$scope.savedToPlay(instruments, bpm)
+
+  //1. play and establish timing
+  $scope.play = function() {
+      // $scope.playing = true
+      console.log($scope.bpm)
+        //establish timing
+      let time = 60000 / $scope.bpm
+      let measure = time * 4
+      let bpm = time / 4
+        //grabbing return value ID of interval before firing pattern
+      intervalId = setInterval(() => {
+        // let bpm = instruments.hihat.0.bpm
+        $scope.loadPattern(bpm)
+      }, measure)
+      console.log("intervalId", intervalId)
+    }
+    //2. acquire sounds
+  $scope.loadPattern = (bpm) => {
+      for (instrument in $scope.instruments) {
+        for (let i = 0; i < grid; i++) {
+          // var sound = $scope.instruments[instrument][i].sample
+          var value = $scope.instruments[instrument][i].value
+          console.log("sound", instrument)
+          $scope.playPatternSound(value, sound, i, $scope.play, bpm)
+        } //end for loop
+      } //end for in loop
+    } //end loadPattern
+    //3. play sound
+  $scope.playPatternSound = function(value, sound, i, playValue, bpm) {
+
+    setTimeout(function() {
+
+      if (value) {
+        console.log("playing")
+        sound.play() //play sound
+
+      }
+    }, bpm * i);
+  }
+
+
+
+
   //fresh beet
   $scope.newBeet = () => {
       let instruments = {
@@ -70,73 +145,6 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       return $scope.instruments = instruments
     } // end newBeet
 
-
-  ///saved
-  $scope.savedToPlay = (savedBeet) => {
-
-      //adding files to instruments object
-      for (key in sounds) {
-        // add 16 tracks per row
-        for (var i = 0; i < grid; i++) {
-          let sample = new Howl({
-            src: [`/assets/audio/beet/${sounds[key]}`],
-            volume: 0.8,
-            html5: true
-          })
-
-          savedBeet[key][i] = {
-            name: "name" + i,
-            sample: sample,
-            value: savedBeet[key][i].value,
-            bpm: savedBeet[key][i].bpm
-          }
-        } // end grid for loop
-      } //end sounds for in loop key in savedBeet
-      console.log(savedBeet)
-
-      // return
-      return $scope.instruments = savedBeet
-
-    } // end savedBeets
-
-
-
-  //1. play and establish timing
-  $scope.play = function() {
-      $scope.playing = true
-      console.log($scope.bpm)
-        //establish timing
-      let time = 60000 / $scope.bpm
-      let measure = time * 4
-      let bpm = time / 4
-        //grabbing return value ID of interval before firing pattern
-      intervalId = setInterval(() => {
-        // let bpm = instruments.hihat.0.bpm
-        $scope.loadPattern(bpm)
-      }, measure)
-      console.log("intervalId", intervalId)
-    }
-    //2. acquire sounds
-  $scope.loadPattern = (bpm) => {
-      for (instrument in $scope.instruments) {
-        for (let i = 0; i < grid; i++) {
-          var sound = $scope.instruments[instrument][i].sample
-          var value = $scope.instruments[instrument][i].value
-          console.log("sound", instrument)
-          $scope.playPatternSound(value, sound, i, $scope.play, bpm)
-        } //end for loop
-      } //end for in loop
-    } //end loadPattern
-    //3. play sound
-  $scope.playPatternSound = function(value, sound, i, playValue, bpm) {
-    setTimeout(function() {
-      if (value) {
-        console.log("playing")
-        sound.play() //play sound
-      }
-    }, bpm * i);
-  }
-
   //stop
   $scope.stop = () => {
     clearInterval(intervalId)
@@ -146,9 +154,8 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   //save pattern and convert to object
 
   $scope.save = function() {
-
       let instruments = angular.copy($scope.instruments)
-        // let instruments_ = Object.assign({}, $scope.instruments)
+        // let instruments_ = Object.assign({}, $scope.instruments) <- does not deep copy object
       let user = {}
       user.UID = $scope.UID
       user.name = $scope.loopName
@@ -162,27 +169,22 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
           if (instruments[name][i].value) {
             user.instruments[name][i] = instruments[name][i].value
           }
-          //firebase : howler src is an array, reset to empty string to be accepted
-          // user.instruments[name][i] = instruments[name][i].value
-          // instruments[name][i].sample =''
-
         } //end for loop
       } //end for in loop
-      // debugger
       beetFactory.save(user).then((res) => {
         //last beet saved
         $scope.beetUID = res
       })
     } //end save function
 
-  //loads last saved beet
-  $scope.loadFB = function() {
-      beetFactory.load().then((userBeets) => {
-        console.log("loading?")
-        $scope.savedToPlay(userBeets)
+  //loads last saved beet ---SAVE
+  // $scope.loadFB = function() {
+  //     beetFactory.load().then((userBeets) => {
+  //       console.log("loading?")
+  //       $scope.savedToPlay(userBeets)
 
-      })
-    }
+  //     })
+    // }
     //     // $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
 
 
