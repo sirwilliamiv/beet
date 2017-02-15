@@ -121,16 +121,10 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
         }
         //adding files to instruments object
       for (name in sounds) {
-        let sample = new Howl({
-          src: [`/assets/audio/beet/${sounds[name]}`],
-          volume: 0.8,
-          html5: true
-        })
         for (var i = 0; i < grid; i++) {
           // previously track
           instruments[name][i] = {
             name: name + i,
-            sample: sample,
             value: false
           }
         } // end grid for loop
