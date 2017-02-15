@@ -19,7 +19,7 @@ $scope.userBeets = beets
 
 // console.log("$scope.uid", $scope.UID.$$state.value)
 $scope.delete = (id)=> {
-
+debugger
 beetFactory.delete(id)
 .then((res) => {
   console.log("what is this", res)

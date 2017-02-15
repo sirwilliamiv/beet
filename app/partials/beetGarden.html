@@ -8,10 +8,10 @@
         <div class="col s12 m6">
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-              <span class="card-title">{{pattern}}</span>
+              <span class="card-title">{{pattern.name}}</span>
             </div>
             <div class="card-action">
-              <a ng-click="delete('-Kct9ztod7IdYbaZSUkM')" href=>Delete This Beet</a>
+              <a ng-click="delete(pattern.beetID[0])" href=>Delete This Beet</a>
               <a href="#!/main">Play This Beet</a>
             </div>
           </div>

@@ -23,6 +23,7 @@ app.factory('beetFactory', ($q, authFactory, $http, $location) => {
 
               if(allBeets.data[beet].UID === UID){
                   userBeets[beet] = allBeets.data[beet]
+                  userBeets[beet].beetID = [beet]
               }
             }
                   console.log("userBeets", userBeets)
