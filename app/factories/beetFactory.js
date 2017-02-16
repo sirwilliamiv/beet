@@ -1,7 +1,8 @@
 app.factory('beetFactory', ($q, authFactory, $http, $location) => {
   let UID = ""
-  return {
-    save: (savedBeet, UID) => {
+
+
+function save(savedBeet, UID) {
       return $http.post(`https://beet-35be8.firebaseio.com/userBeets.json`, savedBeet)
         .then((beetid) => {
 
@@ -9,7 +10,10 @@ app.factory('beetFactory', ($q, authFactory, $http, $location) => {
           $http.post(`https://beet-35be8.firebaseio.com/Users/${UID}/beets.json`, beetGarden)
           return beetid.data.name
         })
-    },
+    }
+
+
+  return {
 
     load: () => {
       return authFactory.getUser().then((res) => {
@@ -39,6 +43,31 @@ app.factory('beetFactory', ($q, authFactory, $http, $location) => {
         })
 
     },
+    save: (uid,name,bpm,savedInstruments, grid) => {
+      let instruments = angular.copy(savedInstruments)
+        // let instruments_ = Object.assign({}, $scope.instruments) <- does not deep copy object
+      let user = {}
+      user.UID = uid
+      user.name = name
+      user.bpm = bpm
+      user.instruments = {}
+      debugger
+      console.log("save")
+      for (name in instruments) {
+        user.instruments[name] = {}
+
+        for (var i = 0; i < grid; i++) {
+          if (instruments[name][i].value) {
+            user.instruments[name][i] = instruments[name][i].value
+          }
+        } //end for loop
+      } //end for in loop
+
+      return save(user).then((res) => {
+        //last beet saved
+        let beetUID = res
+      })
+    }, //end save function
     getThisBeet: (beetid) => {
       return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${beetid}.json`)
         .then((res) => {
