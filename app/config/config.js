@@ -32,7 +32,7 @@ app.config(($routeProvider, $locationProvider) => {
         })
         .when('/login', {
           controller: 'loginCtrl',
-          templateUrl: '/partials/login.html'
+          templateUrl: '/partials/home.html'
         })
         .when('/register', {
           controller: 'registerCtrl',

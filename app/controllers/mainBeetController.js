@@ -4,38 +4,10 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
-
-
-
-  // const samples = {
-  //     hihat: new Howl({
-  //       src: ['/assets/audio/beet/HH.mp3'],
-  //       volume: 0.5,
-  //       html5: true
-  //     }),
-  //     kick: new Howl({
-  //       src: ['/assets/audio/beet/BD.mp3'],
-  //       volume: 0.8,
-  //       html5: true
-  //     }),
-  //     openhihat: new Howl({
-  //       src: ['/assets/audio/beet/openHH.mp3'],
-  //       volume: 0.5,
-  //       html5: true
-  //     }),
-  //     snare: new Howl({
-  //       src: ['/assets/audio/beet/SN.mp3'],
-  //       volume: 0.8,
-  //       html5: true
-  //     })
-  //   } //end samples object
-
   let grid = 16;
   let intervalId = 0; // becomes the setInterval id
   $scope.bpm = 90
   $scope.playing = false
-
-
 
   //1. play and establish timing
   $scope.play = function() {
@@ -66,8 +38,6 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
         //adding files to instruments object
       for (name in instruments) {
         for (var i = 0; i < grid; i++) {
-
-          // previously track
           instruments[name][i] = {
             name: name + i,
             value: false
@@ -75,12 +45,13 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
         } // end grid for loop
       } //end sounds for in loop
       console.log(instruments)
-        // return
+
       return $scope.instruments = instruments
     } // end newBeet
 $scope.newBeet()
-  //stop
-  $scope.stop = () => {
+
+//stop
+$scope.stop = () => {
     clearInterval(intervalId)
     $scope.playing = false
   }

@@ -13,3 +13,37 @@
 
     </div>
 </div>
+ <button ng-controller="logoutCtrl" ng-click="logout()" class="waves-effect grey btn-large">Logout</button>
+  <button id="loginButton" href="/shared/components/loginView.html" data-target="loginModal" class="waves-effect grey btn-large"> LOGIN</button>
+  <button class="registerButton waves-effect grey btn-large" data-target="registerModal"> Register</button>
+
+<!-- modal -->
+ <div id="loginModal" ng-controller="loginCtrl" class="modal">
+    <div class="modal-content">
+      <h4>Login</h4>
+      <form>
+        <input type="email" ng-model="user_email" placeholder="Email">
+        <input type="password" ng-model="user_password" placeholder="Password">
+        <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="userLogin()" value="LOGIN">
+      </form>
+      <p>New?
+        <button data-target="registerModal" class="modal-action modal-close waves-effect waves-white btn-flat registerButton">Register</button>
+      </p>
+    </div>
+  </div>
+<!-- end login modal -->
+ <!-- Register Modal  -->
+  <div id="registerModal" ng-controller="registerCtrl" class="modal">
+    <div class="modal-content">
+
+      <h4>Register</h4>
+      <form>
+        <input type="text" ng-model="firstName" placeholder="First">
+        <input type="text" ng-model="lastName" placeholder="Last">
+        <input type="email" ng-model="user_email" placeholder="Email">
+        <input type="password" ng-model="user_password" placeholder="Password">
+        <input type="submit" ng-click="createUser()" class="modal-action modal-close waves-effect waves-green btn-flat" value="Register">
+      </form>
+    </div>
+  </div>
+  <!-- End Register Modal  -->
