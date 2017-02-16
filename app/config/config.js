@@ -13,7 +13,7 @@ app.config(($routeProvider, $locationProvider) => {
       $locationProvider.hashPrefix('!')
       $routeProvider
         .when('/main/:beet', {
-          controller: 'mainCtrl',
+          controller: 'savedMainCtrl',
           templateUrl: '/partials/mainBeet.html',
           resolve: {
             beetPlay(beetFactory, $route) {
@@ -21,7 +21,7 @@ app.config(($routeProvider, $locationProvider) => {
             },
              user(authFactory, $location) {
                 return authFactory.getUser().catch(() => {
-                  $location.url('/main')
+
                   console.log('not logged in')
                 })
               }
@@ -40,7 +40,15 @@ app.config(($routeProvider, $locationProvider) => {
         })
         .when('/main', {
           controller: 'mainCtrl',
-          templateUrl: '/partials/mainBeet.html'
+          templateUrl: '/partials/mainBeet.html',
+          resolve: {
+            user(authFactory, $location) {
+                return authFactory.getUser().catch(() => {
+
+                  console.log('not logged in')
+                })
+            }
+          }
         })
         .when('/beetGarden', {
             controller: 'beetGardenCtrl',

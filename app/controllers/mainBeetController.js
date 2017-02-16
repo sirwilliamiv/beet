@@ -1,16 +1,11 @@
-app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory) {
+app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory, playFactory,user) {
 
   console.log("homeCtrl")
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
 
-  let defaultBeet = {
-    hihat: {},
-    kick: {},
-    openhihat: {},
-    snare: {}
-  };
+
 
   const samples = {
       hihat: new Howl({
@@ -35,7 +30,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       })
     } //end samples object
 
-  const grid = 16;
+  let grid = 16;
   let intervalId = 0; // becomes the setInterval id
   $scope.bpm = 90
   $scope.playing = false
@@ -43,30 +38,49 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
 
 
-  // $scope.beetFromGarden = instruments
+
   ///saved
-  $scope.savedToPlay = (instruments, bpm) => {
-      $scope.bpm = bpm
-        //adding files to instruments object
-      for (key in samples) {
-        // add 16 tracks per row
-        for (var i = 0; i < grid; i++) {
-          instruments[key][i] = {
-            name: [key] + i,
-            // sample: sample,
-            value: instruments[key][i] || false,
-            // bpm: instruments[key][i].bpm
-          }
-        } // end grid for loop
-      } //end sounds for in loop key in instruments
-      console.log(instruments)
+  // $scope.savedToPlay = (instruments, bpm) => {
+  //   let defaultBeet = {
+  //   hihat: {},
+  //   kick: {},
+  //   openhihat: {},
+  //   snare: {}
+  // };
+  //     $scope.bpm = bpm
+  //       //adding files to instruments object
+  //     for (key in samples) {
+  //       // add 16 tracks per row
+  //       for (var i = 0; i < grid; i++) {
+  //         instruments[key][i] = {
+  //           name: [key] + i,
+  //           // sample: sample,
+  //           value: instruments[key][i] || false,
+  //           // bpm: instruments[key][i].bpm
+  //         }
+  //       } // end grid for loop
+  //     } //end sounds for in loop key in instruments
+  //     console.log(instruments)
 
-      // return
-      return $scope.instruments = instruments
+  //     // return
+  //     return $scope.instruments = instruments
 
-    } // end savedBeets
+  //   } // end savedBeets
+  //
+  //
+  //   ///********DO NOT NEED BELOW
+    //logged in or not determines which state to be in
+//   $scope.pageLoad = (instruments) => {
+// debugger
+//     if (instruments = null || undefined) {
+//       $scope.newBeet()
+//     } else {
 
-  $scope.savedToPlay(instruments, bpm)
+//       // $scope.savedToPlay(instruments, bpm)
+//     }
+//   }
+// // console.log("instruments",instruments)
+//   $scope.pageLoad(instruments,bpm)
 
 
 
@@ -82,7 +96,8 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
         //grabbing return value ID of interval before firing pattern
       intervalId = setInterval(() => {
         // let bpm = instruments.hihat.0.bpm
-        $scope.loadPattern(bpm)
+        // $scope.loadPattern(bpm)
+        playFactory.loadPattern(bpm)
       }, measure)
       console.log("intervalId", intervalId)
     }
@@ -111,7 +126,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
     }, bpm * i);
   }
 
-// samples.hihat.play()
+  // samples.hihat.play()
 
 
   //fresh beet
