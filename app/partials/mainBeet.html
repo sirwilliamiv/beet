@@ -1,6 +1,6 @@
 
 <!-- <h1 ng-click="playPatternSound()"> hihat</h1> -->
-
+<div class="container">
 <h1 class="grey-darken-1" ng-click="save()">SAVE!!!!!!!!</h1>
 <br><br>
 <h4 ng-click="newBeet()">load a fresh beet</h4><br>
@@ -10,8 +10,8 @@
 <div ng-click="play(instruments)">Play</div>
 <br><br><br><br><br>
 <div ng-click="stop()">Stop</div>
-<ul ng-repeat="instrument in instruments">
-  <li ng-repeat="beat in instrument track by $index">
+<ul  ng-repeat="instrument in instruments">
+  <li  class="grid-row" ng-repeat="beat in instrument track by $index">
     <input type="checkbox" id="test{{beat.name}}" ng-model="beat.value" />
     <label for="test{{beat.name}}">{{beat.name}}</label>
   </li>
@@ -20,3 +20,5 @@
 
 <!-- <h1 ng-click="loadFB()">LOAD THE PATTERNS</h1> -->
 <a href="#!/beetGarden">My BeetGarden</a>
+
+</div> <!-- end container -->

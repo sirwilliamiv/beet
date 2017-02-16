@@ -2,3 +2,15 @@ body {
   background-color: lightgrey;
 
 }
+
+.grid-row {
+  display: inline;
+
+}
+
+.home-billybeet {
+  max-width: 40%;
+  max-height: 40%;
+  min-height: 40%;
+  min-height: 40%;
+}

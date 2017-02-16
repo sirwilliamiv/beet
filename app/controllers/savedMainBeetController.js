@@ -18,8 +18,13 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
         //adding files to instruments object
       for (key in defaultBeet) {
         // add 16 tracks per row
+        if (!instruments[key]) {
+          instruments[key] = []
+        }
+
         for (var i = 0; i < grid; i++) {
           console.log("in here", instruments[key])
+
           instruments[key][i] = {
             name: [key] + i,
             value: instruments[key][i] || false
@@ -27,7 +32,7 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
         } // end grid for loop
       } //end sounds for in loop key in instruments
 
-      return $scope.instruments = defaultBeet
+      return $scope.instruments = instruments
 
     } // end savedBeets
 
