@@ -91,7 +91,7 @@ $scope.save = function() {
   let beetName = $scope.loopName
   let bpm = $scope.bpm
   let savedInstruments = $scope.instruments
-  debugger
+
   beetFactory.save(uid,beetName,bpm, savedInstruments,grid)
 }
 

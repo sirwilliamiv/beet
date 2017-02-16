@@ -1,8 +1,11 @@
 app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
 console.log("savedMainCTrl")
  let grid = 16;
+ authFactory.getUser().then((uid) => {
+    $scope.UID = uid
+  })
 
-  $scope.savedToPlay = (instruments, bpm) => {
+$scope.loadSavedBeet = (instruments, bpm) => {
     let defaultBeet = {
     hihat: {},
     kick: {},
@@ -29,7 +32,7 @@ console.log("savedMainCTrl")
 
     } // end savedBeets
 
-$scope.savedToPlay(instruments, bpm)
+$scope.loadSavedBeet(instruments, bpm)
 
 //1. play and establish timing
   $scope.play = function(instruments) {
@@ -50,6 +53,17 @@ $scope.savedToPlay(instruments, bpm)
   $scope.stop = ()=>{
     clearInterval(intervalId)
   }
+
+    //save pattern and convert to object
+$scope.save = function() {
+  let uid = $scope.UID
+  let beetName = $scope.loopName
+  let bpm = $scope.bpm
+  let savedInstruments = $scope.instruments
+
+  beetFactory.save(uid,beetName,bpm, savedInstruments,grid)
+}
+
 
 
 
