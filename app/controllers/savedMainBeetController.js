@@ -1,13 +1,14 @@
 app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
   console.log("savedMainCTrl")
-  let grid = 16;
+  $scope.grid = 16;
+  let grid = $scope.grid
 
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
 
   $scope.newBeet =(grid)=> {
-
+debugger
 $scope.instruments =  playFactory.newBeet(grid)
 }
   $scope.loadSavedBeet = (instruments, bpm) => {
