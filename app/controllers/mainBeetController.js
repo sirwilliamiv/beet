@@ -5,11 +5,11 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
     $scope.UID = uid
   })
 
-  const sounds = {
-    hihat: 'HH.mp3',
-    kick: 'BD.mp3',
-    openhihat: 'openHH.mp3',
-    snare: 'SN.mp3'
+  let defaultBeet = {
+    hihat: {},
+    kick: {},
+    openhihat: {},
+    snare: {}
   };
 
   const samples = {
@@ -68,6 +68,8 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
   $scope.savedToPlay(instruments, bpm)
 
+
+
   //1. play and establish timing
   $scope.play = function() {
       // $scope.playing = true
@@ -76,6 +78,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       let time = 60000 / $scope.bpm
       let measure = time * 4
       let bpm = time / 4
+      $scope.loadPattern(bpm)
         //grabbing return value ID of interval before firing pattern
       intervalId = setInterval(() => {
         // let bpm = instruments.hihat.0.bpm
@@ -120,8 +123,9 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
           snare: {}
         }
         //adding files to instruments object
-      for (name in sounds) {
+      for (name in instruments) {
         for (var i = 0; i < grid; i++) {
+
           // previously track
           instruments[name][i] = {
             name: name + i,
@@ -160,6 +164,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
           }
         } //end for loop
       } //end for in loop
+
       beetFactory.save(user).then((res) => {
         //last beet saved
         $scope.beetUID = res
