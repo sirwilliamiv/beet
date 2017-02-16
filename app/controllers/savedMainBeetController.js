@@ -6,6 +6,10 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
     $scope.UID = uid
   })
 
+  $scope.newBeet =(grid)=> {
+
+$scope.instruments =  playFactory.newBeet(grid)
+}
   $scope.loadSavedBeet = (instruments, bpm) => {
       let defaultBeet = {
         hihat:"",

@@ -28,27 +28,27 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
     }
 
   //fresh beet
-  $scope.newBeet = () => {
-      let instruments = {
-          hihat: {},
-          kick: {},
-          openhihat: {},
-          snare: {}
-        }
-        //adding files to instruments object
-      for (name in instruments) {
-        for (var i = 0; i < grid; i++) {
-          instruments[name][i] = {
-            name: name + i,
-            value: false
-          }
-        } // end grid for loop
-      } //end sounds for in loop
-      console.log(instruments)
+  // $scope.newBeet = () => {
+  //     let instruments = {
+  //         hihat: {},
+  //         kick: {},
+  //         openhihat: {},
+  //         snare: {}
+  //       }
+  //       //adding files to instruments object
+  //     for (name in instruments) {
+  //       for (var i = 0; i < grid; i++) {
+  //         instruments[name][i] = {
+  //           name: name + i,
+  //           value: false
+  //         }
+  //       } // end grid for loop
+  //     } //end sounds for in loop
+  //     console.log(instruments)
 
-      return $scope.instruments = instruments
-    } // end newBeet
-$scope.newBeet()
+  //     return $scope.instruments = instruments
+  //   } // end newBeet
+$scope.instruments =  playFactory.newBeet()
 
 //stop
 $scope.stop = () => {

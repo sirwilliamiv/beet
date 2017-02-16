@@ -38,6 +38,28 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
   return {
 
+     newBeet: (grid) => {
+      let instruments = {
+          hihat: {},
+          kick: {},
+          openhihat: {},
+          snare: {}
+        }
+        //adding files to instruments object
+      for (name in instruments) {
+        debugger
+        for (var i = 0; i < grid; i++) {
+          instruments[name][i] = {
+            name: name + i,
+            value: false
+          }
+        } // end grid for loop
+      } //end sounds for in loop
+      console.log(instruments)
+
+      return instruments
+    }, // end newBeet
+
 
     loadPattern: (bpm, instruments, grid) => {
 
