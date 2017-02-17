@@ -51,7 +51,7 @@ function save(savedBeet, UID) {
       user.name = name
       user.bpm = bpm
       user.instruments = {}
-      debugger
+
       console.log("save")
       for (name in instruments) {
         user.instruments[name] = {}

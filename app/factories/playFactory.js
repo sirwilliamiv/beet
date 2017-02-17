@@ -47,7 +47,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
         }
         //adding files to instruments object
       for (name in instruments) {
-        debugger
+
         for (var i = 0; i < grid; i++) {
           instruments[name][i] = {
             name: name + i,

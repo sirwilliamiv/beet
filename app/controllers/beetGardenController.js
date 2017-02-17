@@ -1,13 +1,13 @@
 app.controller('beetGardenCtrl', function($scope,$location, beets, $http, authFactory, beetFactory) {
   console.log("beetgarden")
-  console.log('beets', beets)
+  // console.log('beets', beets)
   $scope.userBeets = beets
 
 
   $scope.delete = (id) => {
     beetFactory.delete(id)
       .then((res) => {
-        console.log("what is this", res)
+        // console.log("what is this", res)
       })
 
   }

@@ -4,10 +4,13 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
-  let grid = 16;
+ $scope.grid = 16;
+  let grid = $scope.grid
   let intervalId = 0; // becomes the setInterval id
   $scope.bpm = 90
   $scope.playing = false
+  // $scope.instruments = instruments
+  let instruments =  {}
 
   //1. play and establish timing
   $scope.play = function() {
@@ -27,28 +30,29 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       console.log("intervalId", intervalId)
     }
 
-  //fresh beet
-  // $scope.newBeet = () => {
-  //     let instruments = {
-  //         hihat: {},
-  //         kick: {},
-  //         openhihat: {},
-  //         snare: {}
-  //       }
-  //       //adding files to instruments object
-  //     for (name in instruments) {
-  //       for (var i = 0; i < grid; i++) {
-  //         instruments[name][i] = {
-  //           name: name + i,
-  //           value: false
-  //         }
-  //       } // end grid for loop
-  //     } //end sounds for in loop
-  //     console.log(instruments)
 
-  //     return $scope.instruments = instruments
-  //   } // end newBeet
-$scope.instruments =  playFactory.newBeet()
+  $scope.newBeet = () => {
+       instruments = {
+          hihat: {},
+          kick: {},
+          openhihat: {},
+          snare: {}
+        }
+        //adding files to instruments object
+      for (name in instruments) {
+        for (var i = 0; i < grid; i++) {
+          instruments[name][i] = {
+            name: name + i,
+            value: false
+          }
+        } // end grid for loop
+      } //end sounds for in loop
+      console.log(instruments)
+
+      return $scope.instruments = instruments
+    } // end newBeet
+    $scope.newBeet()
+// $scope.instruments =  playFactory.newBeet()
 
 //stop
 $scope.stop = () => {

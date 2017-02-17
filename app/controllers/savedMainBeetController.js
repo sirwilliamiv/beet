@@ -8,7 +8,7 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
   })
 
   $scope.newBeet =(grid)=> {
-debugger
+
 $scope.instruments =  playFactory.newBeet(grid)
 }
   $scope.loadSavedBeet = (instruments, bpm) => {
@@ -28,7 +28,7 @@ $scope.instruments =  playFactory.newBeet(grid)
         }
 
         for (var i = 0; i < grid; i++) {
-          console.log("in here", instruments[key])
+
 
           instruments[key][i] = {
             name: [key] + i,
