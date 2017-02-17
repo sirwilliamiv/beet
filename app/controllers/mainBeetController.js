@@ -30,6 +30,20 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       console.log("intervalId", intervalId)
     }
 
+    $scope.changeValue = (beet)=>{
+      console.log(beet)
+      // let value = beet.value
+      if(beet.value) {
+        beet.value = false
+
+
+      } else {
+
+        beet.value = true
+      }
+      console.log("after", beet.value)
+    }
+
 
   $scope.newBeet = () => {
        instruments = {

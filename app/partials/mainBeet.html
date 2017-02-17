@@ -12,9 +12,21 @@
 <br><br><br><br><br>
 <div ng-click="stop()">Stop</div>
 <ul  ng-repeat="instrument in instruments">
-  <li  class="grid-row" ng-repeat="beat in instrument track by $index">
-    <input type="checkbox" id="test{{beat.name}}" ng-model="beat.value" />
-    <label for="test{{beat.name}}">{{beat.name}}</label>
+  <li  class="grid-row" ng-repeat="beet in instrument track by $index">
+  <!-- {{beat.name}} -->
+    <div class="round-button">
+   <!--  <a href="http://example.com"> -->
+        <img src="http://codeitdown.com/media/Home_Icon.svg"  id="test{{beat.name}}" alt="beetButton" ng-click="changeValue(beet)" />
+        <!-- ng-class="use this to show what's playing" -->
+    </a>
+</div>
+
+
+   <!--  <input type="checkbox" id="test{{beat.name}}" ng-model="beat.value" /> -->
+
+    <!-- <label for="test{{beat.name}}"></label> -->
+
+
   </li>
 </ul>
 
