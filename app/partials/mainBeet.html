@@ -1,37 +1,38 @@
-
 <!-- <h1 ng-click="playPatternSound()"> hihat</h1> -->
 <div class="container">
-<a href="#!/home">Run Home</a>
-<h1 class="grey-darken-1" ng-click="save()">SAVE!!!!!!!!</h1>
-<br><br>
-<h4 ng-click="newBeet(grid)">load a fresh beet</h4><br>
-<input type="text" ng-model="bpm" placeholder="BPM">
-<input type="text" ng-model="loopName" placeholder="Name Your Loop">
+  <a href="#!/home">Home Page</a>
+  <!-- <h4 class="grey-darken-1" ng-click="save()">SAVE!!!!!!!!</h4> -->
+  <br>
+  <br>
+  <!-- <h4 ng-click="newBeet(grid)">load a fresh beet</h4> -->
+  <br>
 
-<div ng-click="play(instruments)">Play</div>
-<br><br><br><br><br>
-<div ng-click="stop()">Stop</div>
-<ul  ng-repeat="instrument in instruments">
-  <li  class="grid-row" ng-repeat="beet in instrument track by $index">
-  <!-- {{beat.name}} -->
-    <div class="round-button">
-   <!--  <a href="http://example.com"> -->
-        <img src="http://codeitdown.com/media/Home_Icon.svg"  id="test{{beat.name}}" alt="beetButton" ng-click="changeValue(beet)" />
-        <!-- ng-class="use this to show what's playing" -->
-    </a>
+  <!-- <div ng-click="play(instruments)">Play</div> -->
+  <div class="controls">
+  <img ng-click="play(instruments)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
+  <img ng-click="stop()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
+  <img ng-click="newBeet(grid)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
+
+   <img ng-click="save()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
+    </div> <!-- end controls -->
+
+
+  <section class="drum-container">
+  <div ng-repeat="instrument in instruments">
+    <span>Name  </span>
+     <img id="{{instrument}}" src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_off.png">
+    <div class="grid-row" ng-repeat="beet in instrument track by $index">
+      <!-- {{beat.name}} -->
+      <img src="http://webaudiodemos.appspot.com/MIDIDrums/images/button_off.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beat.name}}" class="round-button ">
+
+      <!-- ng-class="use this to show what's playing" -->
+    </div>
+    </div>
+  </section>
+  <!--end drum-container -->
+    <a href="#!/beetGarden">My BeetGarden</a>
+
+  <input class="input" type="text" ng-model="bpm" placeholder="BPM">
+  <input class="input" type="text" ng-model="loopName" placeholder="Name Your Beet">
 </div>
-
-
-   <!--  <input type="checkbox" id="test{{beat.name}}" ng-model="beat.value" /> -->
-
-    <!-- <label for="test{{beat.name}}"></label> -->
-
-
-  </li>
-</ul>
-
-
-<!-- <h1 ng-click="loadFB()">LOAD THE PATTERNS</h1> -->
-<a href="#!/beetGarden">My BeetGarden</a>
-
-</div> <!-- end container -->
+<!-- end container -->

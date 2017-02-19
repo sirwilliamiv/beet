@@ -8,8 +8,9 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
   })
 
   $scope.newBeet =(grid)=> {
+    $scope.stop()
 
-$scope.instruments =  playFactory.newBeet(grid)
+    $scope.instruments =  playFactory.newBeet(grid)
 }
   $scope.loadSavedBeet = (instruments, bpm) => {
       let defaultBeet = {
@@ -70,6 +71,20 @@ $scope.instruments =  playFactory.newBeet(grid)
 
     beetFactory.save(uid, beetName, bpm, savedInstruments, grid)
   }
+//change pattern
+   $scope.changeValue = (beet)=>{
+      console.log(beet)
+      // let value = beet.value
+      if(beet.value) {
+        beet.value = false
+
+
+      } else {
+
+        beet.value = true
+      }
+      console.log("after", beet.value)
+    }
 
 
 

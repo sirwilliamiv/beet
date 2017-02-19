@@ -46,6 +46,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
 
   $scope.newBeet = () => {
+    $scope.stop()
        instruments = {
           hihat: {},
           kick: {},
