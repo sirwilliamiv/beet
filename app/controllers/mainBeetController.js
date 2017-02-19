@@ -13,7 +13,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
   let instruments =  {}
 
   //1. play and establish timing
-  $scope.play = function() {
+  $scope.play = () => {
       // $scope.playing = true
       console.log($scope.bpm)
         //establish timing
@@ -35,14 +35,20 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       // let value = beet.value
       if(beet.value) {
         beet.value = false
-
-
       } else {
-
         beet.value = true
       }
       console.log("after", beet.value)
     }
+
+$scope.plusTempo = () => {
+  console.log("plus")
+  $scope.bpm = $scope.bpm + 4
+}
+$scope.minusTempo = () => {
+  console.log("minus")
+  $scope.bpm = $scope.bpm - 4
+}
 
 
   $scope.newBeet = () => {
@@ -66,7 +72,9 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
       return $scope.instruments = instruments
     } // end newBeet
-    $scope.newBeet()
+    // $scope.newBeet()
+
+
 // $scope.instruments =  playFactory.newBeet()
 
 //stop

@@ -44,6 +44,15 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
 
   $scope.loadSavedBeet(instruments, bpm)
 
+  $scope.plusTempo = () => {
+  console.log("plus")
+  $scope.bpm = $scope.bpm + 4
+}
+$scope.minusTempo = () => {
+  console.log("minus")
+  $scope.bpm = $scope.bpm - 4
+}
+
   //1. play and establish timing
   $scope.play = function(instruments) {
     // $scope.playing = true

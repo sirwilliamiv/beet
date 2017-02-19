@@ -13,14 +13,17 @@
       <img ng-click="stop()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
       <img class="save" ng-click="save()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
       <img ng-click="newBeet(grid)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
+      <img ng-click="plusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png">
+      <img ng-click="minusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png">
+
     </div>
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
-      <span>Name  </span>
+      <span>{{Name}} </span>
       <img id="{{instrument}}" src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
       <div class="grid-row" ng-class="{'grey': beet.value=== true}" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
-        <img src="http://webaudiodemos.appspot.com/MIDIDrums/images/button_off.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beat.name}}" class="round-button ">
+        <img src="http://webaudiodemos.appspot.com/MIDIDrums/images/button_off.png" alt="beetButton" ng-click="changebeet(beet)" id="beet{{beet.name}}" class="round-button ">
         <!-- ng-class="use this to show what's playing" -->
       </div>
     </div>
