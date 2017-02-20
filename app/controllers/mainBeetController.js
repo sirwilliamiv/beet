@@ -51,7 +51,12 @@ $scope.minusTempo = () => {
   $scope.bpm = $scope.bpm - 4
 }
 
-
+// MUTE FEATURE
+// $scope.mute= (name)=> {
+//   let newName = name.replace('0','')
+//   console.log("hey", newName )
+//   playFactory.mute(newName)
+// }
   $scope.newBeet = () => {
     // $scope.stop()
        instruments = {
@@ -74,6 +79,7 @@ $scope.minusTempo = () => {
       return $scope.instruments = instruments
     } // end newBeet
     $scope.newBeet()
+
 
 
 // $scope.instruments =  playFactory.newBeet()

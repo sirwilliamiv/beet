@@ -4,18 +4,19 @@ app.controller('beetGardenCtrl', function($scope,$location, beets, $http, authFa
   $scope.userBeets = beets
 
 
-  $scope.delete = (id) => {
-    // debugger
+  $scope.delete = (pattern) => {
+    const id = pattern.beetID[0]
+
     beetFactory.delete(id)
       .then((res) => {
-
-        // delete $scope.id
+        console.log("hey", id)
+        delete $scope.userBeets[id]
         // console.log("what is this", res)
       })
 
   }
-  $scope.playThisBeet = (beetid) => {
-
+  $scope.playThisBeet = (pattern) => {
+    const beetid = pattern.beetID[0]
    $location.url(`/main/${beetid}`)
   }
 

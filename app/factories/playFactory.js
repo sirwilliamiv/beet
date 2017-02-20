@@ -12,6 +12,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
       }, bpm * i);
     }
 
+
   let samples = {
       hihat: new Howl({
         src: ['/assets/audio/beet/HH.mp3'],
@@ -45,7 +46,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
           openhihat: {},
           snare: {}
         }
-        //adding files to instruments object
+        //adding default value false to instruments object
       for (name in instruments) {
 
         for (var i = 0; i < grid; i++) {
@@ -73,7 +74,16 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
         } //end for loop
       } //end for in loop
     }, //end loadPattern
-    //3. play sound
+//  MUTE FEATURE   mute: (name)=> {
+//   if(samples[name].volume == 0.5) {
+// console.log("if")
+//      return samples[name].volume = 0.0
+//   } else {
+//     console.log("else")
+//     return samples[name].volume = 0.5
+//   }
+// } //end mute
+
 
 
   } //end return object

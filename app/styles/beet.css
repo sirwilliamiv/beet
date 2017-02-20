@@ -67,6 +67,15 @@ display: inline;
 min-width: 670px;
 }
 
+#linkGarden {
+  /*text-align: center;*/
+  width: 35%;
+  padding: 1rem;
+  /*margin-left: -2rem;*/
+  background-image: url("http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_bg.png");
+  background-repeat: no-repeat;
+}
+
 /**************beet Garden View*************/
 
 .savedBeet {

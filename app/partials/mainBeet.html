@@ -20,17 +20,17 @@
     </div>
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
-      <span>{{Name}} </span>
-      <img id="{{instrument}}" src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
+      <span>{{}} </span>
+      <img id="{{instrument}}" ng-click="mute(instrument[0].name)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
       <div class="grid-row"  ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
         <!-- ng-class="{'grey': beet.value=== true}" -->
-        <img ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}" class="round-button ">
+        <img ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
         <!-- ng-class="use this to show what's playing" -->
       </div>
     </div>
   </section>
   <!--end drum-container -->
-  <a href="#!/beetGarden">My BeetGarden</a>
+  <a id="linkGarden" href="#!/beetGarden">My BeetGarden</a>
 </div>
 <!-- end container -->

@@ -2,7 +2,7 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
   console.log("savedMainCTrl")
   $scope.grid = 16;
   let grid = $scope.grid
-
+  $scope.playing = false
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
@@ -55,7 +55,7 @@ $scope.minusTempo = () => {
 
   //1. play and establish timing
   $scope.play = function(instruments) {
-    // $scope.playing = true
+    $scope.playing = true
     console.log($scope.bpm)
       //establish timing
     let time = 60000 / $scope.bpm
@@ -69,6 +69,7 @@ $scope.minusTempo = () => {
   }
   $scope.stop = () => {
     clearInterval(intervalId)
+    $scope.playing = false
   }
 
   //save pattern and convert to object
