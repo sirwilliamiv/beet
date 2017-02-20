@@ -8,7 +8,7 @@ app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, aut
   })
 
   $scope.newBeet =(grid)=> {
-    $scope.stop()
+    // $scope.stop()
 
     $scope.instruments =  playFactory.newBeet(grid)
 }

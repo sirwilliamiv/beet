@@ -10,12 +10,12 @@
   <section class="drum-container">
     <div class="controls center-align">
       <input id="beetName" type="text" ng-model="loopName" placeholder="Name Your Beet">
-      <img class="controls" ng-click="play(instruments)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
-      <img class="controls" ng-click="stop()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
-      <img class="controls" class="save" ng-click="save()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
-      <img ng-click="newBeet(grid)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
-      <img class="controls" ng-click="minusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png">
-      <img class="controls" ng-click="plusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png">
+      <img class="controls" id="play" ng-click="play(instruments)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
+      <img class="controls" id="stop" ng-click="stop()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
+      <img class="controls" id="save" class="save" ng-click="save()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
+      <img ng-click="newBeet(grid)" id="reset" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
+      <img class="controls tempo" id="minus" ng-click="minusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png">
+      <img class="controls tempo" id="plus" ng-click="plusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png">
       <input id="bpm" type="text" ng-model="bpm" placeholder="BPM">
     </div>
     <!-- end controls -->
@@ -24,7 +24,7 @@
       <img id="{{instrument}}" src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
       <div class="grid-row" ng-class="{'grey': beet.value=== true}" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
-        <img src="http://webaudiodemos.appspot.com/MIDIDrums/images/button_off.png" alt="beetButton" ng-click="changebeet(beet)" id="beet{{beet.name}}" class="round-button ">
+        <img src="http://webaudiodemos.appspot.com/MIDIDrums/images/button_off.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}" class="round-button ">
         <!-- ng-class="use this to show what's playing" -->
       </div>
     </div>

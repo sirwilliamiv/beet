@@ -72,7 +72,7 @@ $scope.minusTempo = () => {
 
       return $scope.instruments = instruments
     } // end newBeet
-    // $scope.newBeet()
+    $scope.newBeet()
 
 
 // $scope.instruments =  playFactory.newBeet()

@@ -53,10 +53,15 @@ body {
   margin-right: -3px;
 }
 
-.controls:hover {
+#play:hover, #stop:hover, #save:hover, #reset:hover, #minus:hover, #plus:hover {
+  opacity: 0.7;
 
 
 }
+/*
+.tempo {
+  margin-left: 5px;
+}*/
 
 .grid-row {
 display: inline;
