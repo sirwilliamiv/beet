@@ -46,6 +46,7 @@ body {
   margin-right: 20px;
   font-size: 1.5rem;
   text-align: center;
+  /*-webkit-writing-mode: none;*/
 
   }
 

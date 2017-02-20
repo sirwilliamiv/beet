@@ -14,7 +14,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
 
   //1. play and establish timing
   $scope.play = () => {
-      // $scope.playing = true
+      $scope.playing = true
       console.log($scope.bpm)
         //establish timing
       let time = 60000 / $scope.bpm

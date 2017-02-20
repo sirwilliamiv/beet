@@ -5,13 +5,17 @@ app.controller('beetGardenCtrl', function($scope,$location, beets, $http, authFa
 
 
   $scope.delete = (id) => {
+    // debugger
     beetFactory.delete(id)
       .then((res) => {
+
+        // delete $scope.id
         // console.log("what is this", res)
       })
 
   }
   $scope.playThisBeet = (beetid) => {
+
    $location.url(`/main/${beetid}`)
   }
 
