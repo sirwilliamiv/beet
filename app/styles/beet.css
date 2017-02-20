@@ -32,13 +32,30 @@ body {
 
 
 }
-.input {
-  width: 20%;
-  background-color: green;
+#bpm {
+  width: 11.9%;
+  margin-left: 20px;
+  font-size: 2.5rem;
+  background-image: url("http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_bg.png");
+  background-image: no-repeat;
+  text-align: center;
 }
+
+#beetName {
+  width: 25%;
+  margin-right: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+
+  }
 
 .save {
   margin-right: -3px;
+}
+
+.controls:hover {
+
+
 }
 
 .grid-row {
