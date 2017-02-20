@@ -30,8 +30,8 @@ body {
   -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
   /*display: none;*/
 
-
 }
+
 #bpm {
   width: 11.9%;
   margin-left: 20px;
@@ -55,8 +55,6 @@ body {
 
 #play:hover, #stop:hover, #save:hover, #reset:hover, #minus:hover, #plus:hover {
   opacity: 0.7;
-
-
 }
 /*
 .tempo {
@@ -67,6 +65,25 @@ body {
 display: inline;
 min-width: 670px;
 }
+
+/**************beet Garden View*************/
+
+.savedBeet {
+  /*display: inline-block;*/
+  /*min-width: 650px;*/
+  border-radius: 10px;
+  border: 1px solid rgb(230, 230, 230);
+  /*width: 800px;*/
+  background-color: rgb(255, 255, 255);
+  margin: 0px auto;
+  padding: 20px 20px 15px 20px;
+  -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+#delete {
+  margin-left: 3rem;
+}
+
 /*clicked button
  http://webaudiodemos.appspot.com/MIDIDrums/images/button_on.png*/
  /*led on

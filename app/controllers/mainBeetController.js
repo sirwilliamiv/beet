@@ -35,6 +35,7 @@ app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFact
       // let value = beet.value
       if(beet.value) {
         beet.value = false
+
       } else {
         beet.value = true
       }

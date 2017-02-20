@@ -22,9 +22,10 @@
     <div ng-repeat="instrument in instruments">
       <span>{{Name}} </span>
       <img id="{{instrument}}" src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
-      <div class="grid-row" ng-class="{'grey': beet.value=== true}" ng-repeat="beet in instrument track by $index">
+      <div class="grid-row"  ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
-        <img src="http://webaudiodemos.appspot.com/MIDIDrums/images/button_off.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}" class="round-button ">
+        <!-- ng-class="{'grey': beet.value=== true}" -->
+        <img ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}" class="round-button ">
         <!-- ng-class="use this to show what's playing" -->
       </div>
     </div>

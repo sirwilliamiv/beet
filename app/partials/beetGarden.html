@@ -1,22 +1,20 @@
-<h1>beetGarden</h1>
-<!-- <h2 ng-click="loading()">load</h2> -->
-<h3>Choose a beet to play</h3>
-<a href="#!/main">Go play</a>
+<div class="container">
+  <h1>beetGarden</h1>
+  <!-- <h2 ng-click="loading()">load</h2> -->
+  <h3>Choose a beet to play</h3>
+  <a href="#!/main">Go play</a>
+  <div class="row">
+    <div class="savedBeet col m6" ng-repeat="pattern in userBeets">
+      <div class="">
+        <h4 class="">{{pattern.name}}</h4>
+      <img class="controls" id="play" ng-click="playThisBeet(pattern.beetID[0])" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
+        <!-- <div class="card-action"> -->
+        <!-- <a ng-click="delete(pattern.beetID[0])">Delete This Beet</a> -->
 
-<div >
- <div class="row" ng-repeat="pattern in userBeets">
-        <div class="col s12 m6">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">{{pattern.name}}</span>
-            </div>
-            <div class="card-action">
-              <a ng-click="delete(pattern.beetID[0])" >Delete This Beet</a>
-              <a ng-click="playThisBeet(pattern.beetID[0])" >Play This Beet</a>
-            </div>
-          </div>
-        </div>
+
+         <i class="material-icons" id="delete" ng-click="delete(pattern.beetID[0])">delete</i>
+        <!-- <a ng-click="playThisBeet(pattern.beetID[0])">Play This Beet</a> -->
       </div>
-
+    </div>
+  </div>
 </div>
-href="#!/main"
