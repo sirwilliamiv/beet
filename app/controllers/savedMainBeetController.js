@@ -83,18 +83,28 @@ $scope.minusTempo = () => {
   }
 //change pattern
    $scope.changeValue = (beet)=>{
-      console.log(beet)
+      // console.log(beet)
       // let value = beet.value
       if(beet.value) {
         beet.value = false
-
-
       } else {
-
         beet.value = true
       }
-      console.log("after", beet.value)
+      // console.log("after", beet.value)
     }
+
+    // MUTE FEATURE
+$scope.mute= (instrument)=> {
+  Object.defineProperty(instrument, 'muted', {
+    value: !instrument.muted, enumerable: false
+  })
+
+  // instrument.muted = !instrument.muted
+  const name = instrument[0].name
+  let newName = name.replace('0','')
+  console.log("hey", newName )
+  playFactory.toggleMute(newName, instrument.muted)
+}
 
 
 

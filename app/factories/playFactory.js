@@ -1,16 +1,16 @@
 app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
- function playPatternSound(value, sound, i, bpm) {
+  function playPatternSound(value, sound, i, bpm) {
 
-      setTimeout(function() {
+    setTimeout(function() {
 
-        if (value) {
-          console.log("playing")
-          samples[sound].play() //play sound
+      if (value) {
+        console.log("playing")
+        samples[sound].play() //play sound
 
-        }
-      }, bpm * i);
-    }
+      }
+    }, bpm * i);
+  }
 
 
   let samples = {
@@ -39,23 +39,28 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
   return {
 
-     newBeet: (grid) => {
+    newBeet: (grid) => {
       let instruments = {
-          hihat: {},
-          kick: {},
-          openhihat: {},
-          snare: {}
+          // beets: {
+            hihat: {},
+            kick: {},
+            openhihat: {},
+            snare: {}
+          // }
         }
         //adding default value false to instruments object
       for (name in instruments) {
+        // for(name in beets){
 
         for (var i = 0; i < grid; i++) {
+
           instruments[name][i] = {
             name: name + i,
             value: false
           }
         } // end grid for loop
-      } //end sounds for in loop
+      // }//end name in beets
+      } //end instruments for in loop
       console.log(instruments)
 
       return instruments
@@ -70,19 +75,15 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
           var sound = instrument
           var value = instruments[instrument][i].value
           console.log("sound", instrument)
-           playPatternSound(value, sound, i, bpm)
+          playPatternSound(value, sound, i, bpm)
         } //end for loop
       } //end for in loop
     }, //end loadPattern
-//  MUTE FEATURE   mute: (name)=> {
-//   if(samples[name].volume == 0.5) {
-// console.log("if")
-//      return samples[name].volume = 0.0
-//   } else {
-//     console.log("else")
-//     return samples[name].volume = 0.5
-//   }
-// } //end mute
+    // MUTE FEATURE
+    toggleMute: (name, onOff) => {
+        samples[name].mute(onOff)
+
+      } //end mute
 
 
 

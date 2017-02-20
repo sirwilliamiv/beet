@@ -1,6 +1,11 @@
 <!-- <h1 ng-click="playPatternSound()"> hihat</h1> -->
 <div class="container">
+<div class="links">
   <a href="#!/home">Home Page</a>
+  </div>
+  <div class="links">
+    <a id="linkGarden" href="#!/beetGarden">My BeetGarden</a>
+  </div>
   <!-- <h4 class="grey-darken-1" ng-click="save()">SAVE!!!!!!!!</h4> -->
   <br>
   <br>
@@ -10,27 +15,26 @@
   <section class="drum-container">
     <div class="controls center-align">
       <input id="beetName" type="text" ng-model="loopName" placeholder="Name Your Beet">
-      <img class="controls" ng-if="playing === false" id="play" ng-click="play(instruments)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
-      <img class="controls" ng-if="playing === true" id="stop" ng-click="stop()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
-      <img class="controls" id="save" class="save" ng-click="save()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
-      <img ng-click="newBeet(grid)" id="reset" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
-      <img class="controls tempo" id="minus" ng-click="minusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png">
-      <img class="controls tempo" id="plus" ng-click="plusTempo()" src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png">
+      <img class="controls" ng-if="playing === false" id="play" ng-click="play(instruments)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
+      <img class="controls" ng-if="playing === true" id="stop" ng-click="stop()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
+      <img class="controls" id="save" class="save" ng-click="save()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
+      <img ng-click="newBeet(grid)" id="reset" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
+      <img class="controls tempo" id="minus" ng-click="minusTempo()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png">
+      <img class="controls tempo" id="plus" ng-click="plusTempo()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png">
       <input id="bpm" type="text" ng-model="bpm" placeholder="BPM">
     </div>
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
       <span>{{}} </span>
-      <img id="{{instrument}}" ng-click="mute(instrument[0].name)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
-      <div class="grid-row"  ng-repeat="beet in instrument track by $index">
+      <img id="{{instrument}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
+      <div class="grid-row" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
-        <!-- ng-class="{'grey': beet.value=== true}" -->
+        <!-- ng-class="{ blue lighten-4 : beet.value }" -->
         <img ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
-        <!-- ng-class="use this to show what's playing" -->
+
       </div>
     </div>
   </section>
   <!--end drum-container -->
-  <a id="linkGarden" href="#!/beetGarden">My BeetGarden</a>
 </div>
 <!-- end container -->
