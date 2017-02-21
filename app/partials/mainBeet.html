@@ -1,10 +1,10 @@
 <!-- <h1 ng-click="playPatternSound()"> hihat</h1> -->
 <div class="container">
 <div class="links">
-  <a href="#!/home">Home Page</a>
+  <a class="aTags" href="#!/home">Home</a>
   </div>
   <div class="links">
-    <a id="linkGarden" href="#!/beetGarden">My BeetGarden</a>
+    <a class="aTags" href="#!/beetGarden">My BeetGarden</a>
   </div>
   <!-- <h4 class="grey-darken-1" ng-click="save()">SAVE!!!!!!!!</h4> -->
   <br>
@@ -25,12 +25,12 @@
     </div>
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
-      <span>{{}} </span>
-      <img id="{{instrument}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
+      <!-- <span>mute button here </span> -->
+     <!--  <img id="{{instrument}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png"> -->
       <div class="grid-row" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
         <!-- ng-class="{ blue lighten-4 : beet.value }" -->
-        <img ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
+        <img class="beet" ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
 
       </div>
     </div>

@@ -2,22 +2,42 @@
  <div class="homerow valign-wrapper">
 
       <div class="home col s8">
-      <h3>billy's </h3>
-        <h4>fresh beetz</h4>
         <!-- Promo Content 1 goes here -->
-        <img class="home-billybeet" src="/assets/img/billyBeet.png">
+        <!-- <img class="home-billybeet" src="/assets/img/billyBeet.png"> -->
       </div>
 
       <div class="home col s4">
-        <!-- Promo Content 3 goes here
-        button goes here to go to mainBeet-->
+        <h5 id="titleSupport">BILLY'S FRESH</h5>
+        <h1 id="title">BEETZ</h1>
       </div>
 
     </div>
 </div>
- <button   class="waves-effect grey btn-large"><a href="#!/main">Go Play</a></button><button ng-controller="logoutCtrl" ng-click="logout()" class="waves-effect grey btn-large">Logout</button>
-  <button id="loginButton"data-target="loginModal" class="waves-effect grey btn-large"> LOGIN</button>
-  <button class="registerButton waves-effect grey btn-large" data-target="registerModal"> Register</button>
+
+<div class="links">
+    <a class="aTags" href="#!/main">PLAY</a>
+</div>
+
+<div ng-controller="logoutCtrl" ng-click="logout()" class="links">
+    <a class="aTags">LOGOUT</a>
+</div>
+
+<div id="loginButton" data-target="loginModal" class="links">
+    <a class="aTags">LOGIN</a>
+</div>
+
+<div id="registerButton" data-target="registerModal" class="links">
+    <a class="aTags">REGISTER</a>
+</div>
+
+
+<!--
+ <button   class="waves-effect grey btn-large"><a href="#!/main">Go Play</a></button> -->
+
+<!--  <button ng-controller="logoutCtrl" ng-click="logout()" class="waves-effect grey btn-large">Logout</button> -->
+
+<!--   <button id="loginButton"data-target="loginModal" class="waves-effect grey btn-large"> LOGIN</button> -->
+<!--   <button class="registerButton waves-effect grey btn-large" data-target="registerModal"> Register</button> -->
 
 <!-- modal -->
  <div id="loginModal" ng-controller="loginCtrl" class="modal">

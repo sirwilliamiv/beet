@@ -11,7 +11,7 @@ console.log("login")
   $('#loginModal').modal('open');
   //login
   $('#loginModal').modal({
-    dismissible: false, // Modal can be dismissed by clicking outside of the modal
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
     opacity: 0.3, // Opacity of modal background
     inDuration: 700, // Transition in duration
     outDuration: 700, // Transition out duration

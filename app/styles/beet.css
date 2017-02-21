@@ -1,13 +1,24 @@
 body {
   background-color: rgb(245, 245, 245);
   color: rgb(121, 121, 121);
-  font-family: 'Droid Sans', Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 13px;
 }
 
 
-
-
+/********Home View*******/
+#title {
+  font-size: 20rem;
+  letter-spacing: -2.8rem;
+  margin-top: -4rem;
+  color:#424242 ;
+}
+#titleSupport {
+  letter-spacing: -.45rem;
+  font-size: 3rem;
+  color: darkgrey;
+  margin-bottom: -5rem;
+}
 
 .home-billybeet {
   max-width: 40%;
@@ -20,6 +31,7 @@ body {
 
 .drum-container {
   display:block;
+
   min-width: 650px;
   border-radius: 10px;
   border: 1px solid rgb(230, 230, 230);
@@ -54,7 +66,7 @@ body {
   margin-right: -3px;
 }
 
-#play:hover, #stop:hover, #save:hover, #reset:hover, #minus:hover, #plus:hover {
+#play:hover, #stop:hover, #save:hover, #reset:hover, #minus:hover, #plus:hover, .links:hover, #linkGarden:hover, #delete:hover, .beet:hover {
   opacity: 0.7;
 }
 
@@ -71,6 +83,29 @@ min-width: 670px;
   padding-top: 1rem;
   display: inline;
   width: 25%;
+  letter-spacing: -.28rem;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 5%;
+  background-color: rgb(255, 255, 255);
+  margin: 0px auto;
+  padding: 20px 20px 15px 20px;
+  -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+   font-size: 2rem;
+
+
+
+  /*background-image: url("http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_bg.png");*/
+  /*background-repeat: no-repeat;*/
+}
+.aTags {
+  color:inherit;
+}
+
+#linkGarden {
+  padding-top: 1rem;
+  /*di*/
+  width: 25%;
   /*padding: 1rem;*/
   border: 1px solid rgb(230, 230, 230);
   border-radius: 5%;
@@ -78,27 +113,27 @@ min-width: 670px;
   margin: 0px auto;
   padding: 20px 20px 15px 20px;
   -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
-  text-align: center
-  /*background-image: url("http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_bg.png");*/
-  /*background-repeat: no-repeat;*/
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+
+
 }
-
-#linkGarden {
-
+#linktoMain {
+  color: inherit;
 }
 
 /**************beet Garden View*************/
 
 .savedBeet {
-  /*display: inline-block;*/
-  /*min-width: 650px;*/
+ min-height: 300px;
   border-radius: 10px;
   border: 1px solid rgb(230, 230, 230);
-  /*width: 800px;*/
   background-color: rgb(255, 255, 255);
   margin: 0px auto;
   padding: 20px 20px 15px 20px;
   -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 #delete {

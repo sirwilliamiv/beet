@@ -98,6 +98,8 @@ $scope.stop = () => {
 
   //save pattern and convert to object
 $scope.save = function() {
+   var $toastContent = $('<span>Beet Saved</span>');
+    Materialize.toast($toastContent, 1000);
   let uid = $scope.UID
   let beetName = $scope.loopName
   let bpm = $scope.bpm
