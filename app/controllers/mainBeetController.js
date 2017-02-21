@@ -76,7 +76,8 @@ $scope.mute= (instrument)=> {
         for (var i = 0; i < grid; i++) {
           instruments[name][i] = {
             name: name + i,
-            value: false
+            value: false,
+            playing: false
           }
         } // end grid for loop
       } //end sounds for in loop
@@ -121,7 +122,7 @@ $scope.save = function() {
   beetFactory.save(uid,beetName,bpm, savedInstruments,grid)
 }
 
-
+//set interval which calls a set timeout
 
 
   //loads last saved beet ---SAVE

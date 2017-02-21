@@ -1,4 +1,4 @@
-app.controller('savedMainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
+app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
   console.log("savedMainCTrl")
   $scope.grid = 16;
   let grid = $scope.grid
@@ -96,14 +96,18 @@ $scope.minusTempo = () => {
       // console.log("after", beet.value)
     }
 
-$scope.checkAuth = (user)=> {
-  console.log("user", user)
-  if(!user) {
+$scope.checkAuth = ()=> {
+  if (!user) {
     var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
     Materialize.toast($toastContent, 3500);
   } else {
     $location.url('/beetGarden')
   }
+}
+
+if (!user) {
+  var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+  Materialize.toast($toastContent, 3500);
 }
 
     // MUTE FEATURE

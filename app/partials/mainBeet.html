@@ -30,7 +30,7 @@
       <div class="grid-row" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
         <!-- ng-class="{ blue lighten-4 : beet.value }" -->
-        <img class="beet" ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
+        <img class="beet" ng-class=" {'follow':  beet.playing}" ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
 
       </div>
     </div>

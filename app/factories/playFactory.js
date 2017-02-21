@@ -1,15 +1,19 @@
 app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
-  function playPatternSound(value, sound, i, bpm) {
+  function playPatternSound(value, sound, i, bpm, instruments, instrument) {
 
     setTimeout(function() {
 
+        instruments[instrument][i].playing = true
       if (value) {
-        console.log("playing")
+        console.log("here")
+        // console.log("playing")
         samples[sound].play() //play sound
 
       }
     }, bpm * i);
+
+
   }
 
 
@@ -56,7 +60,8 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
           instruments[name][i] = {
             name: name + i,
-            value: false
+            value: false,
+            playing: false
           }
         } // end grid for loop
       // }//end name in beets
@@ -72,10 +77,11 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
       for (instrument in instruments) {
         for (let i = 0; i < grid; i++) {
 
+          var playing = instruments[instrument][i].playing
           var sound = instrument
           var value = instruments[instrument][i].value
           console.log("sound", instrument)
-          playPatternSound(value, sound, i, bpm)
+          playPatternSound(value, sound, i, bpm, instruments,instrument)
         } //end for loop
       } //end for in loop
     }, //end loadPattern
