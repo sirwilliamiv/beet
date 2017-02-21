@@ -1,46 +1,38 @@
 <div class="home container valign-wrapper">
- <div class="homerow valign-wrapper">
-
-      <div class="home col s8">
-        <!-- Promo Content 1 goes here -->
-        <!-- <img class="home-billybeet" src="/assets/img/billyBeet.png"> -->
-      </div>
-
-      <div class="home col s4">
-        <h5 id="titleSupport">BILLY'S FRESH</h5>
-        <h1 id="title">BEETZ</h1>
-      </div>
-
+  <div class="homerow valign-wrapper">
+  <!--   <div class="home col s8">
+      <!-- Promo Content 1 goes here -->
+      <!-- <img class="home-billybeet" src="/assets/img/billyBeet.png"> -->
+    <!-- </div> -->
+    <div class="home col s4">
+      <h5 id="titleSupport">BILLY'S FRESH</h5>
+      <h1 class="center-align" id="title">BEETZ</h1>
     </div>
+  </div>
 </div>
 
-<div class="links">
+<div class=" valign-wrapper navbar">
+  <div class="links">
     <a class="aTags" href="#!/main">PLAY</a>
-</div>
-
-<div ng-controller="logoutCtrl" ng-click="logout()" class="links">
+  </div>
+  <div ng-controller="logoutCtrl" ng-click="logout()" class="links">
     <a class="aTags">LOGOUT</a>
-</div>
-
-<div id="loginButton" data-target="loginModal" class="links">
+  </div>
+  <div id="loginButton" data-target="loginModal" class="links">
     <a class="aTags">LOGIN</a>
-</div>
-
-<div id="registerButton" data-target="registerModal" class="links">
+  </div>
+  <div id="registerButton" data-target="registerModal" class="links">
     <a class="aTags">REGISTER</a>
-</div>
+  </div>
+  </div>  <!--  end nav bar -->
 
-
-<!--
+  <!--
  <button   class="waves-effect grey btn-large"><a href="#!/main">Go Play</a></button> -->
-
-<!--  <button ng-controller="logoutCtrl" ng-click="logout()" class="waves-effect grey btn-large">Logout</button> -->
-
-<!--   <button id="loginButton"data-target="loginModal" class="waves-effect grey btn-large"> LOGIN</button> -->
-<!--   <button class="registerButton waves-effect grey btn-large" data-target="registerModal"> Register</button> -->
-
-<!-- modal -->
- <div id="loginModal" ng-controller="loginCtrl" class="modal">
+  <!--  <button ng-controller="logoutCtrl" ng-click="logout()" class="waves-effect grey btn-large">Logout</button> -->
+  <!--   <button id="loginButton"data-target="loginModal" class="waves-effect grey btn-large"> LOGIN</button> -->
+  <!--   <button class="registerButton waves-effect grey btn-large" data-target="registerModal"> Register</button> -->
+  <!-- modal -->
+  <div id="loginModal" ng-controller="loginCtrl" class="modal">
     <div class="modal-content">
       <h4>Login</h4>
       <form>
@@ -53,11 +45,10 @@
       </p>
     </div>
   </div>
-<!-- end login modal -->
- <!-- Register Modal  -->
+  <!-- end login modal -->
+  <!-- Register Modal  -->
   <div id="registerModal" ng-controller="registerCtrl" class="modal">
     <div class="modal-content">
-
       <h4>Register</h4>
       <form>
         <input type="text" ng-model="firstName" placeholder="First">

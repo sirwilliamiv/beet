@@ -7,9 +7,14 @@ body {
 
 
 /********Home View*******/
+
+.homerow {
+  padding-top: 4rem;
+}
+
 #title {
-  font-size: 20rem;
-  letter-spacing: -2.8rem;
+  font-size: 25rem;
+  letter-spacing: -3.7rem;
   margin-top: -4rem;
   color:#424242 ;
 }
@@ -17,7 +22,7 @@ body {
   letter-spacing: -.45rem;
   font-size: 3rem;
   color: darkgrey;
-  margin-bottom: -5rem;
+  margin-bottom: -6rem;
 }
 
 .home-billybeet {
@@ -32,7 +37,7 @@ body {
 .drum-container {
   display:block;
 
-  min-width: 650px;
+  min-width: 850px;
   border-radius: 10px;
   border: 1px solid rgb(230, 230, 230);
   width: 800px;
@@ -60,6 +65,11 @@ body {
   text-align: center;
   /*-webkit-writing-mode: none;*/
 
+  }
+
+  .beet {
+    width: 3.5em;
+    height: 3.5rem;
   }
 
 .save {
