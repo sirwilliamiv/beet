@@ -96,6 +96,16 @@ $scope.minusTempo = () => {
       // console.log("after", beet.value)
     }
 
+$scope.checkAuth = (user)=> {
+  console.log("user", user)
+  if(!user) {
+    var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+    Materialize.toast($toastContent, 3500);
+  } else {
+    $location.url('/beetGarden')
+  }
+}
+
     // MUTE FEATURE
 $scope.mute= (instrument)=> {
   Object.defineProperty(instrument, 'muted', {

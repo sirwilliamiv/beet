@@ -43,8 +43,13 @@ app.config(($routeProvider, $locationProvider) => {
           templateUrl: '/partials/mainBeet.html',
           resolve: {
             user(authFactory, $location) {
-                return authFactory.getUser().catch(() => {
-
+                return authFactory.getUser()
+                .then((user) => {
+                  console.log('logged in')
+                  return user
+                })
+                .catch(() => {
+                  $location.url('/main')
                   console.log('not logged in')
                 })
             }
@@ -58,7 +63,12 @@ app.config(($routeProvider, $locationProvider) => {
                 return beetFactory.load()
               },
               user(authFactory, $location) {
-                return authFactory.getUser().catch(() => {
+                return authFactory.getUser()
+                .then((user) => {
+                  console.log('logged in')
+                  return user
+                })
+                .catch(() => {
                   $location.url('/main')
                   console.log('not logged in')
                 })

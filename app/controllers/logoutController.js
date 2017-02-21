@@ -4,7 +4,7 @@ console.log("logout")
   $scope.logout = () => {
     authFactory.logout()
       .then(() => {console.log('logged out')
-        // $location.url('/login')
+        $location.url('/home')
       })
   }
 });

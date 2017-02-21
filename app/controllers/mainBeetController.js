@@ -1,4 +1,4 @@
-app.controller('mainCtrl', function($http, $scope, $timeout, $interval, authFactory, beetFactory, playFactory,user) {
+app.controller('mainCtrl', function($http,$location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory,user) {
 
   console.log("homeCtrl")
   authFactory.getUser().then((uid) => {
@@ -86,6 +86,19 @@ $scope.mute= (instrument)=> {
     } // end newBeet
     $scope.newBeet()
 
+$scope.checkAuth = ()=> {
+  if (!user) {
+    var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+    Materialize.toast($toastContent, 3500);
+  } else {
+    $location.url('/beetGarden')
+  }
+}
+
+if (!user) {
+  var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+  Materialize.toast($toastContent, 3500);
+}
 
 
 // $scope.instruments =  playFactory.newBeet()
@@ -98,7 +111,7 @@ $scope.stop = () => {
 
   //save pattern and convert to object
 $scope.save = function() {
-   var $toastContent = $('<span>Beet Saved</span>');
+   var $toastContent = $('<span class="toast">Beet Saved</span>');
     Materialize.toast($toastContent, 1000);
   let uid = $scope.UID
   let beetName = $scope.loopName
