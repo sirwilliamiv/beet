@@ -1,18 +1,19 @@
 <div class="container">
-  <h1>beetGarden</h1>
+  <h1 id="gardenTitle" >GARDENofBEETZ</h1>
   <!-- <h2 ng-click="loading()">load</h2> -->
-  <h3>Choose a beet to play</h3>
+  <!-- <h3>Choose a beet to play</h3> -->
 
   <div id="linkGarden">
-    <a id="linktoMain" href="#!/main">Back to Beetz</a>
+    <a id="linktoMain" href="#!/main">BACKtoBEETZ</a>
   </div>
   <!-- <a href="#!/main">Go play</a> -->
   <div class="row">
-    <div class="savedBeet col m6" ng-repeat="pattern in userBeets">
+    <div class="savedBeet col m3" ng-repeat="pattern in userBeets">
       <div class="">
-        <h4 class="">{{pattern.name}}</h4>
-          <p>{{pattern.bpm}} bpm</p>
-      <img class="controls" id="play" ng-click="playThisBeet(pattern)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
+        <h4>{{pattern.name}}</h4>
+          <p>{{pattern.bpm}}  bpm</p>
+      <!-- <img class="controls" id="play" ng-click="playThisBeet(pattern)" src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png"> -->
+      <i id="play" ng-click="playThisBeet(pattern)" class="material-icons">play_arrow</i>
          <i id="delete" class="material-icons" id="delete" ng-click="delete(pattern)">delete</i>
       </div>
     </div>

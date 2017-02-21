@@ -114,9 +114,7 @@ min-width: 670px;
 
 #linkGarden {
   padding-top: 1rem;
-  /*di*/
   width: 25%;
-  /*padding: 1rem;*/
   border: 1px solid rgb(230, 230, 230);
   border-radius: 5%;
   background-color: rgb(255, 255, 255);
@@ -130,11 +128,16 @@ min-width: 670px;
 
 }
 #linktoMain {
+  letter-spacing: -.38rem;
+  font-size: 2.5rem;
   color: inherit;
 }
 
 /**************beet Garden View*************/
 
+#gardenTitle {
+ letter-spacing: -.48rem;
+}
 .savedBeet {
  min-height: 300px;
   border-radius: 10px;
@@ -144,6 +147,8 @@ min-width: 670px;
   padding: 20px 20px 15px 20px;
   -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
   text-align: center;
+  letter-spacing: -.18rem;
+  font-size: 1.5rem;
 }
 
 #delete {
