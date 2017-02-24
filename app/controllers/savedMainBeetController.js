@@ -13,12 +13,15 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
     $scope.instruments =  playFactory.newBeet(grid)
 }
   $scope.loadSavedBeet = (instruments, bpm) => {
+
       let defaultBeet = {
         hihat:"",
         kick:"",
         openhihat:"",
         snare: ""
       };
+
+      $scope.loopName = name
       $scope.bpm = bpm
 
         //adding files to instruments object
@@ -27,10 +30,7 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
         if (!instruments[key]) {
           instruments[key] = []
         }
-
         for (var i = 0; i < grid; i++) {
-
-
           instruments[key][i] = {
             name: [key] + i,
             value: instruments[key][i] || false
@@ -41,8 +41,8 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
       return $scope.instruments = instruments
 
     } // end savedBeets
-
-  $scope.loadSavedBeet(instruments, bpm)
+debugger
+  $scope.loadSavedBeet(instruments, bpm, name)
 
   $scope.plusTempo = () => {
   console.log("plus")

@@ -11,12 +11,13 @@ app.controller('beetGardenCtrl', function($scope,$location, beets, $http, authFa
       .then((res) => {
         console.log("hey", id)
         delete $scope.userBeets[id]
-        // console.log("what is this", res)
+
       })
 
   }
   $scope.playThisBeet = (pattern) => {
     const beetid = pattern.beetID[0]
+
    $location.url(`/main/${beetid}`)
   }
 

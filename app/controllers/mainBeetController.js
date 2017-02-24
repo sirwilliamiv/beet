@@ -32,7 +32,6 @@ app.controller('mainCtrl', function($http,$location, $scope, $timeout, $interval
 
     $scope.changeValue = (beet)=>{
       console.log(beet)
-      // let value = beet.value
       if(beet.value) {
         beet.value = false
 

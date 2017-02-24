@@ -6,12 +6,12 @@
   <div class="links">
     <a class="aTags" ng-click="checkAuth()">My BeetGarden</a>
   </div>
-  <!-- <h4 class="grey-darken-1" ng-click="save()">SAVE!!!!!!!!</h4> -->
+
   <br>
   <br>
-  <!-- <h4 ng-click="newBeet(grid)">load a fresh beet</h4> -->
+
   <br>
-  <!-- <div ng-click="play(instruments)">Play</div> -->
+
   <section class="drum-container">
     <div class="controls center-align">
       <input id="beetName" type="text" ng-model="loopName" placeholder="Name Your Beet">
@@ -25,7 +25,7 @@
     </div>
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
-      <!-- <span>mute button here </span> -->
+      <!-- <span>mute  </span> -->
      <!--  <img id="{{instrument}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png"> -->
       <div class="grid-row" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->

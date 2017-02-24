@@ -71,7 +71,8 @@ function save(savedBeet, UID) {
     getThisBeet: (beetid) => {
       return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${beetid}.json`)
         .then((res) => {
-
+          debugger
+          name = res.data.name
           bpm = res.data.bpm
           instruments = res.data.instruments
 
