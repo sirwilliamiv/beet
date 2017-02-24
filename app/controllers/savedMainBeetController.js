@@ -117,7 +117,7 @@ if (!user) {
 
     // MUTE FEATURE
 $scope.mute= (instrument)=> {
-  // debugger
+
   instrument.muted = !instrument.muted
   const name = instrument[0].name
   let newName = name.replace('0','')
