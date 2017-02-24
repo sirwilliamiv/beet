@@ -30,6 +30,11 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
         if (!instruments[key]) {
           instruments[key] = []
         }
+
+        Object.defineProperty(instruments[key], 'muted', {
+          value: false, enumerable: false, writable: true
+        })
+
         for (var i = 0; i < grid; i++) {
           instruments[key][i] = {
             name: [key] + i,
@@ -41,8 +46,8 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
       return $scope.instruments = instruments
 
     } // end savedBeets
-debugger
-  $scope.loadSavedBeet(instruments, bpm, name)
+
+  $scope.loadSavedBeet(instruments, bpm, name, data)
 
   $scope.plusTempo = () => {
   console.log("plus")
@@ -112,14 +117,12 @@ if (!user) {
 
     // MUTE FEATURE
 $scope.mute= (instrument)=> {
-  Object.defineProperty(instrument, 'muted', {
-    value: !instrument.muted, enumerable: false
-  })
-
-  // instrument.muted = !instrument.muted
+  // debugger
+  instrument.muted = !instrument.muted
   const name = instrument[0].name
   let newName = name.replace('0','')
   console.log("hey", newName )
+  console.log("muting:", newName)
   playFactory.toggleMute(newName, instrument.muted)
 }
 

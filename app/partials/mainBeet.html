@@ -32,7 +32,7 @@
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
       <!-- <span>mute  </span> -->
-     <!--  <img id="{{instrument}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png"> -->
+      <img id="{{instrument}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png">
       <div class="grid-row" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
         <!-- ng-class="{ blue lighten-4 : beet.value }" -->
