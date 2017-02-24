@@ -72,6 +72,10 @@ $scope.mute= (instrument)=> {
         }
         //adding files to instruments object
       for (name in instruments) {
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+      Object.defineProperty(instruments[name], 'muted', {
+          value: false, enumerable: false, writable: true
+        })
         for (var i = 0; i < grid; i++) {
           instruments[name][i] = {
             name: name + i,
@@ -84,7 +88,7 @@ $scope.mute= (instrument)=> {
 
       return $scope.instruments = instruments
     } // end newBeet
-    $scope.newBeet()
+  $scope.newBeet()
 
 $scope.checkAuth = ()=> {
   if (!user) {
@@ -119,6 +123,17 @@ $scope.save = function() {
   let savedInstruments = $scope.instruments
 
   beetFactory.save(uid,beetName,bpm, savedInstruments,grid)
+}
+
+    // MUTE FEATURE
+$scope.mute= (instrument)=> {
+  // debugger
+  instrument.muted = !instrument.muted
+  const name = instrument[0].name
+  let newName = name.replace('0','')
+  console.log("hey", newName )
+  console.log("muting:", newName)
+  playFactory.toggleMute(newName, instrument.muted)
 }
 
 //set interval which calls a set timeout

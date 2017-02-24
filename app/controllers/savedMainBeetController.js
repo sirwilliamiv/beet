@@ -30,7 +30,7 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
         if (!instruments[key]) {
           instruments[key] = []
         }
-
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
         Object.defineProperty(instruments[key], 'muted', {
           value: false, enumerable: false, writable: true
         })
