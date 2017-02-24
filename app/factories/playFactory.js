@@ -20,7 +20,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
   let samples = {
       hihat: new Howl({
         src: ['/assets/audio/beet/HH.mp3'],
-        volume: 0.5,
+        volume: 0.4,
         html5: true
       }),
       kick: new Howl({

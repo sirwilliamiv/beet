@@ -1,10 +1,16 @@
-<!-- <h1 ng-click="playPatternSound()"> hihat</h1> -->
+
 <div class="container">
 <div class="links">
   <a class="aTags" href="#!/home">Home</a>
   </div>
   <div class="links">
     <a class="aTags" ng-click="checkAuth()">My BeetGarden</a>
+  </div>
+  <div id="loginButton" data-target="loginModal" class="links">
+    <a class="aTags">LOGIN</a>
+  </div>
+    <div ng-controller="logoutCtrl" ng-click="logout()" class="links">
+    <a class="aTags">LOGOUT</a>
   </div>
 
   <br>

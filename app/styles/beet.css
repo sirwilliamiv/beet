@@ -27,6 +27,7 @@ body {
 }
 
 .goPlay {
+
   font-size: 6rem;
   letter-spacing: -.48rem;
 }
@@ -73,14 +74,12 @@ body {
   margin-right: 20px;
   font-size: 1.5rem;
   text-align: center;
-  /*-webkit-writing-mode: none;*/
 
   }
 
   .beet {
     width: 3.5em;
     height: 3.5rem;
-    /*background-color: blue;*/
   }
 
 .save {
