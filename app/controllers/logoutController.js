@@ -1,5 +1,5 @@
 app.controller('logoutCtrl', function($scope,$location, authFactory) {
-console.log("logout")
+
  //Auth
   $scope.logout = () => {
     authFactory.logout()

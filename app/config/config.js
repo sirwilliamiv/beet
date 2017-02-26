@@ -45,7 +45,7 @@ app.config(($routeProvider, $locationProvider) => {
             user(authFactory, $location) {
                 return authFactory.getUser()
                 .then((user) => {
-                  console.log('logged in')
+                  // console.log('logged in')
                   return user
                 })
                 .catch(() => {
@@ -65,7 +65,7 @@ app.config(($routeProvider, $locationProvider) => {
               user(authFactory, $location) {
                 return authFactory.getUser()
                 .then((user) => {
-                  console.log('logged in')
+                  // console.log('logged in')
                   return user
                 })
                 .catch(() => {

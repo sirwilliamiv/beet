@@ -91,10 +91,11 @@ body {
 }
 
 .muted {
-  background-image: url("http://webaudiodemos.appspot.com/MIDIDrums/images/LED_off.png")
+
 }
 
 .grid-row {
+
 display: inline;
 min-width: 670px;
 }

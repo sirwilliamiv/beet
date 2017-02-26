@@ -21,7 +21,7 @@
   <section class="drum-container">
     <div class="controls center-align">
       <input id="beetName" type="text" ng-model="loopName" placeholder="Name Your Beet">
-      <img class="controls" ng-if="playing === false" id="play" ng-click="play(instruments)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
+      <img class="controls" ng-if="playing === false" id="play" ng-click="play(instruments,bpm)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
       <img class="controls" ng-if="playing === true" id="stop" ng-click="stop()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
       <img class="controls" id="save" class="save" ng-click="save()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
       <img ng-click="newBeet(grid)" id="reset" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
@@ -32,7 +32,7 @@
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
       <!-- <span>mute  </span> -->
-      <img id="{{instrument}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="/assets/img/LED_{{instrument.muted}}.png">
+      <img id="{{instrument.name}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="/assets/img/LED_{{instrument.muted}}.png">
       <div class="grid-row" ng-repeat="beet in instrument track by $index">
         <!-- {{beat.name}} -->
         <!-- ng-class="{ blue lighten-4 : beet.value }" -->

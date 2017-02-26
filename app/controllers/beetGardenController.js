@@ -1,6 +1,5 @@
 app.controller('beetGardenCtrl', function($scope,$location, beets, $http, authFactory, beetFactory) {
-  console.log("beetgarden")
-  // console.log('beets', beets)
+
   $scope.userBeets = beets
 
 

@@ -1,6 +1,6 @@
 app.controller('mainCtrl', function($http,$location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory,user) {
 
-  console.log("homeCtrl")
+
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
@@ -15,7 +15,7 @@ app.controller('mainCtrl', function($http,$location, $scope, $timeout, $interval
   //1. play and establish timing
   $scope.play = () => {
       $scope.playing = true
-      console.log($scope.bpm)
+      // console.log($scope.bpm)
         //establish timing
       let time = 60000 / $scope.bpm
       let measure = time * 4
@@ -25,20 +25,21 @@ app.controller('mainCtrl', function($http,$location, $scope, $timeout, $interval
       intervalId = setInterval(() => {
         // let bpm = instruments.hihat.0.bpm
         // $scope.loadPattern(bpm)
+
         playFactory.loadPattern(bpm, instruments, grid)
       }, measure)
-      console.log("intervalId", intervalId)
+
     }
 
     $scope.changeValue = (beet)=>{
-      console.log(beet)
+
       if(beet.value) {
         beet.value = false
 
       } else {
         beet.value = true
       }
-      console.log("after", beet.value)
+
     }
 
 $scope.plusTempo = () => {
@@ -84,7 +85,7 @@ $scope.mute= (instrument)=> {
           }
         } // end grid for loop
       } //end sounds for in loop
-      console.log(instruments)
+
 
       return $scope.instruments = instruments
     } // end newBeet

@@ -1,8 +1,12 @@
 app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
-  console.log("savedMainCTrl")
+
   $scope.grid = 16;
   let grid = $scope.grid
   $scope.playing = false
+
+
+
+
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
@@ -30,9 +34,10 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
         if (!instruments[key]) {
           instruments[key] = []
         }
+
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
         Object.defineProperty(instruments[key], 'muted', {
-          value: false, enumerable: false, writable: true
+          value:false, enumerable: false, writable: true
         })
 
         for (var i = 0; i < grid; i++) {
@@ -47,7 +52,7 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
 
     } // end savedBeets
 
-  $scope.loadSavedBeet(instruments, bpm, name, data)
+$scope.loadSavedBeet(instruments, bpm, name, data)
 
   $scope.plusTempo = () => {
   console.log("plus")
@@ -59,19 +64,24 @@ $scope.minusTempo = () => {
 }
 
   //1. play and establish timing
-  $scope.play = function(instruments) {
+  $scope.play = function(instruments,bpm) {
     $scope.playing = true
-    console.log($scope.bpm)
+    // console.log($scope.bpm)
       //establish timing
-    let time = 60000 / $scope.bpm
+
+    let time = 60000 / bpm
     let measure = time * 4
-    let bpm = time / 4
-    playFactory.loadPattern(bpm, instruments, grid)
+    let rate = time/4
+    playFactory.loadPattern(rate, instruments, grid)
       //grabbing return value ID of interval before firing pattern
     intervalId = setInterval(() => {
-      playFactory.loadPattern(bpm, instruments, grid)
+
+      playFactory.loadPattern(rate, instruments, grid)
     }, measure)
   }
+
+
+
   $scope.stop = () => {
     clearInterval(intervalId)
     $scope.playing = false

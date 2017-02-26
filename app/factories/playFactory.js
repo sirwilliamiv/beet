@@ -6,8 +6,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
         instruments[instrument][i].playing = true
       if (value) {
-        console.log("here")
-        // console.log("playing")
+
         samples[sound].play() //play sound
 
       }
@@ -45,12 +44,12 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
     newBeet: (grid) => {
       let instruments = {
-          // beets: {
+
             hihat: {},
             kick: {},
             openhihat: {},
             snare: {}
-          // }
+
         }
         //adding default value false to instruments object
       for (name in instruments) {
@@ -80,7 +79,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
           var playing = instruments[instrument][i].playing
           var sound = instrument
           var value = instruments[instrument][i].value
-          console.log("sound", instrument)
+
           playPatternSound(value, sound, i, bpm, instruments,instrument)
         } //end for loop
       } //end for in loop

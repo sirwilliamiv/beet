@@ -21,7 +21,7 @@ function save(savedBeet, UID) {
         UID = res
         return $http.get(`https://beet-35be8.firebaseio.com/userBeets/.json`)
           .then((allBeets) => {
-            console.log("uid", UID)
+
             let userBeets = {}
             for (beet in allBeets.data) {
 
@@ -30,7 +30,7 @@ function save(savedBeet, UID) {
                 userBeets[beet].beetID = [beet]
               }
             }
-            console.log("userBeets", userBeets)
+
             return userBeets
           })
       })
@@ -52,11 +52,13 @@ function save(savedBeet, UID) {
       user.bpm = bpm
       user.instruments = {}
 
-      console.log("save")
+
       for (name in instruments) {
+      // THIS SAVES ONLY TRUE VALUES
         user.instruments[name] = {}
 
         for (var i = 0; i < grid; i++) {
+
           if (instruments[name][i].value) {
             user.instruments[name][i] = instruments[name][i].value
           }
@@ -71,6 +73,8 @@ function save(savedBeet, UID) {
     getThisBeet: (beetid) => {
       return $http.get(`https://beet-35be8.firebaseio.com/userBeets/${beetid}.json`)
         .then((res) => {
+
+
           name = res.data.name
           bpm = res.data.bpm
           instruments = res.data.instruments
