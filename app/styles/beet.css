@@ -1,0 +1,199 @@
+body {
+  background-color: rgb(245, 245, 245);
+  color: rgb(121, 121, 121);
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+}
+
+
+/********Home View*******/
+
+.homerow {
+  padding-top: 4rem;
+}
+
+#title {
+  font-size: 25rem;
+  letter-spacing: -3.7rem;
+  margin-top: -4rem;
+  color:#424242 ;
+}
+#titleSupport {
+  display: block
+  letter-spacing: -.45rem;
+  font-size: 3rem;
+  color: darkgrey;
+  margin-bottom: -6rem;
+}
+
+.goPlay {
+
+  font-size: 6rem;
+  letter-spacing: -.48rem;
+}
+
+.home-billybeet {
+  max-width: 40%;
+  max-height: 40%;
+  min-height: 40%;
+  min-height: 40%;
+}
+
+/*******mainBeet View*/
+
+.drum-container {
+  display:block;
+  margin-top: 25%;
+  min-width: 850px;
+  border-radius: 10px;
+  border: 1px solid rgb(230, 230, 230);
+  width: 800px;
+  background-color: rgb(255, 255, 255);
+  margin: 0px auto;
+  padding: 20px 20px 15px 20px;
+  -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+  /*display: none;*/
+
+}
+
+.follow {
+  height:5.5rem;
+}
+
+#bpm {
+  width: 11.9%;
+  margin-left: 20px;
+  font-size: 2.5rem;
+  background-image: url("http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_bg.png");
+  background-image: no-repeat;
+  text-align: center;
+}
+
+#beetName {
+  width: 25%;
+  margin-right: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+
+  }
+
+  .beet {
+    width: 3.5em;
+    height: 3.5rem;
+  }
+
+.save {
+  margin-right: -3px;
+}
+
+#play:hover, #stop:hover, #save:hover, #reset:hover, #minus:hover, #plus:hover, .links:hover, #linkGarden:hover, #delete:hover, .beet:hover, .savedBeet:hover {
+  opacity: 0.6;
+}
+
+.muted {
+
+}
+
+.grid-row {
+
+display: inline;
+min-width: 670px;
+}
+
+.links{
+  padding-top: 1rem;
+  display: inline;
+  width: 25%;
+  letter-spacing: -.28rem;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 5%;
+  background-color: rgb(255, 255, 255);
+  margin: 0px auto;
+  padding: 20px 20px 15px 20px;
+  -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+   font-size: 2rem;
+
+
+
+  /*background-image: url("http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_bg.png");*/
+  /*background-repeat: no-repeat;*/
+}
+.aTags {
+  color:inherit;
+}
+
+#linkGarden {
+  padding-top: 1rem;
+  width: 25%;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 5%;
+  background-color: rgb(255, 255, 255);
+  margin: 0px auto;
+  padding: 20px 20px 15px 20px;
+  -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+
+
+}
+#linktoMain {
+  letter-spacing: -.38rem;
+  font-size: 2.5rem;
+  color: inherit;
+}
+.toast {
+
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 5%;
+  background-color: rgb(255, 255, 255);
+   -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+  /*text-align: center;*/
+   letter-spacing: -.1rem;
+  font-size: 1.4rem;
+  color:black;
+}
+
+/**************beet Garden View*************/
+
+#gardenTitle {
+ letter-spacing: -.54rem;
+}
+.savedBeet {
+ min-height: 300px;
+  border-radius: 10px;
+  border: 1px solid rgb(230, 230, 230);
+  background-color: rgb(255, 255, 255);
+  margin: 10px ;
+  padding: 20px 20px 15px 20px;
+  -webkit-box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  letter-spacing: -.18rem;
+  font-size: 1.5rem;
+}
+
+#delete {
+  margin-left: 3rem;
+}
+
+/*clicked button
+ http://webaudiodemos.appspot.com/MIDIDrums/images/button_on.png*/
+ /*led on
+ http://webaudiodemos.appspot.com/MIDIDrums/images/LED_on.png*/
+/* led off
+ http://webaudiodemos.appspot.com/MIDIDrums/images/LED_off.png*/
+ /*stop
+ http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png*/
+ /*play
+ http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png*/
+/*tempo background
+ http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_bg.png*/
+ /*minus button
+ http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png*/
+ /*add button
+ http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png*/
+ /*save
+ http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png*/
+ /*reset
+ http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png*/
