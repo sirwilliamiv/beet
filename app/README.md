@@ -11,3 +11,7 @@
 
 Trello: https://trello.com/b/TjUlUcE7/beet
 https://app.moqups.com/sirwilliamiv/0PNJplmJgx/edit/page/a84a93e10
+
+
+drum machine images via: https://github.com/cwilso/MIDIDrums
+additional graphic design: Luke Woodward
