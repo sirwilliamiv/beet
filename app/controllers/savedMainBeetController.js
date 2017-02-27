@@ -136,6 +136,16 @@ $scope.mute= (instrument)=> {
   playFactory.toggleMute(newName, instrument.muted)
 }
 
+//select all feature
+$('.beet').click(function(e){
+  debugger
+  console.log("above")
+//   if(e.shiftKey) {
+// console.log("in")
+//     $scope.beet.value = true
+//   }
+})
+
 
 
 

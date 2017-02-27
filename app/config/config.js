@@ -14,7 +14,7 @@ app.config(($routeProvider, $locationProvider) => {
       $routeProvider
         .when('/main/:beet', {
           controller: 'savedMainCtrl',
-          templateUrl: '/partials/mainBeet.html',
+          templateUrl: 'app/partials/mainBeet.html',
           resolve: {
             beetPlay(beetFactory, $route) {
               return beetFactory.getThisBeet($route.current.params.beet)
@@ -28,19 +28,19 @@ app.config(($routeProvider, $locationProvider) => {
           }
         }).when('/home', {
           controller: 'homeCtrl',
-          templateUrl: '/partials/home.html'
+          templateUrl: 'app/partials/home.html'
         })
         .when('/login', {
           controller: 'loginCtrl',
-          templateUrl: '/partials/home.html'
+          templateUrl: 'app/partials/home.html'
         })
         .when('/register', {
           controller: 'registerCtrl',
-          templateUrl: '/partials/register.html'
+          templateUrl: 'app/partials/register.html'
         })
         .when('/main', {
           controller: 'mainCtrl',
-          templateUrl: '/partials/mainBeet.html',
+          templateUrl: 'app/partials/mainBeet.html',
           resolve: {
             user(authFactory, $location) {
                 return authFactory.getUser()
@@ -57,7 +57,7 @@ app.config(($routeProvider, $locationProvider) => {
         })
         .when('/beetGarden', {
             controller: 'beetGardenCtrl',
-            templateUrl: '/partials/beetGarden.html',
+            templateUrl: 'app/partials/beetGarden.html',
             resolve: {
               beets(beetFactory) {
                 return beetFactory.load()
@@ -79,7 +79,7 @@ app.config(($routeProvider, $locationProvider) => {
         // })
           .when('/logout', {
             controller: 'logoutCtrl',
-            templateUrl: '/partials/logout.html'
+            templateUrl: 'app/partials/logout.html'
           }).otherwise({
             redirectTo: '/home'
           })

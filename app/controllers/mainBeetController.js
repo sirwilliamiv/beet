@@ -4,7 +4,7 @@ app.controller('mainCtrl', function($http,$location, $scope, $timeout, $interval
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
- $scope.grid = 16;
+  $scope.grid = 16;
   let grid = $scope.grid
   let intervalId = 0; // becomes the setInterval id
   $scope.bpm = 90

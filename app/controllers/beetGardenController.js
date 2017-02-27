@@ -20,8 +20,4 @@ app.controller('beetGardenCtrl', function($scope,$location, beets, $http, authFa
    $location.url(`/main/${beetid}`)
   }
 
-  // $scope.loading = () => {
-  //  $scope.userBeets = beetFactory.load()
-  // }
-
 });

@@ -1,14 +1,14 @@
 
 <div class="container">
 <div class="links">
-  <a class="aTags" href="#!/home">Home</a>
+  <a class="aTags" href="#!/home">HOME</a>
   </div>
   <div class="links">
     <a class="aTags" ng-click="checkAuth()">My BeetGarden</a>
   </div>
-  <div id="loginButton" data-target="loginModal" class="links">
+  <!-- <div id="loginButton" data-target="loginModal" class="links">
     <a class="aTags">LOGIN</a>
-  </div>
+  </div> -->
     <div ng-controller="logoutCtrl" ng-click="logout()" class="links">
     <a class="aTags">LOGOUT</a>
   </div>
@@ -32,11 +32,11 @@
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
       <!-- <span>mute  </span> -->
-      <img id="{{instrument.name}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="/assets/img/LED_{{instrument.muted}}.png">
+      <img id="{{instrument.name}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="app/assets/img/LED_{{instrument.muted}}.png">
       <div class="grid-row" ng-repeat="beet in instrument track by $index">
-        <!-- {{beat.name}} -->
+
         <!-- ng-class="{ blue lighten-4 : beet.value }" -->
-        <img class="beet" ng-class=" {'follow':  beet.playing}" ng-src="/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
+        <img class="beet" ng-class=" {'follow':  beet.playing}" ng-src="app/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
 
       </div>
     </div>

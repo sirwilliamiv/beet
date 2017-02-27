@@ -29,5 +29,5 @@ $scope.stuff = "things"
   });
 
 
-console.log("register")
+// console.log("register")
 });
