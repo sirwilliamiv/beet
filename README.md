@@ -6,7 +6,7 @@
 ![screen shot 2017-02-27 at 10 14 43 am](https://cloud.githubusercontent.com/assets/23041341/23369035/9fb0dccc-fcd5-11e6-9c4d-331843c4cbbc.png)
 
 
-## CREATE. SAVE. LISTEN
+## CREATE. SAVE. PLAY. DANCE
 
 
 Trello: https://trello.com/b/TjUlUcE7/beet
