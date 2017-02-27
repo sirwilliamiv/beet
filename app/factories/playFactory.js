@@ -18,22 +18,22 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
   let samples = {
       hihat: new Howl({
-        src: ['/assets/audio/beet/HH.mp3'],
+        src: ['app/assets/audio/beet/HH.mp3'],
         volume: 0.4,
         html5: true
       }),
       kick: new Howl({
-        src: ['/assets/audio/beet/BD.mp3'],
+        src: ['app/assets/audio/beet/BD.mp3'],
         volume: 0.8,
         html5: true
       }),
       openhihat: new Howl({
-        src: ['/assets/audio/beet/openHH.mp3'],
+        src: ['app/assets/audio/beet/openHH.mp3'],
         volume: 0.5,
         html5: true
       }),
       snare: new Howl({
-        src: ['/assets/audio/beet/SN.mp3'],
+        src: ['app/assets/audio/beet/SN.mp3'],
         volume: 0.8,
         html5: true
       })
