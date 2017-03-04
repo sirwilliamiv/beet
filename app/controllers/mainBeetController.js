@@ -1,71 +1,70 @@
-app.controller('mainCtrl', function($http,$location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory,user) {
+app.controller('mainCtrl', function($location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
 
+
+  $scope.grid = 16;
+  $scope.bpm = 90
+  $scope.playing = false
+  let grid = $scope.grid
+  let intervalId = 0; // becomes the setInterval id
+  let instruments = {}
 
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
-  $scope.grid = 16;
-  let grid = $scope.grid
-  let intervalId = 0; // becomes the setInterval id
-  $scope.bpm = 90
-  $scope.playing = false
-  // $scope.instruments = instruments
-  let instruments =  {}
 
-  //1. play and establish timing
+//1. play and establish timing
   $scope.play = () => {
-      $scope.playing = true
-      // console.log($scope.bpm)
-        //establish timing
-      let time = 60000 / $scope.bpm
-      let measure = time * 4
-      let bpm = time / 4
+    $scope.playing = true
+
+    //establish timing
+    let time = 60000 / $scope.bpm
+    let measure = time * 4
+    let bpm = time / 4
+    playFactory.loadPattern(bpm, instruments, grid)
+      //grabbing return value ID of interval before firing pattern
+    intervalId = setInterval(() => {
       playFactory.loadPattern(bpm, instruments, grid)
-        //grabbing return value ID of interval before firing pattern
-      intervalId = setInterval(() => {
-        // let bpm = instruments.hihat.0.bpm
-        // $scope.loadPattern(bpm)
+    }, measure)
 
-        playFactory.loadPattern(bpm, instruments, grid)
-      }, measure)
+  }
 
+//toggle individual beet value
+  $scope.changeValue = (beet) => {
+    if (beet.value) {
+      beet.value = false
+    } else {
+      beet.value = true
     }
+  }
 
-    $scope.changeValue = (beet)=>{
+//tempo adjust
+  $scope.plusTempo = () => {
+    console.log("plus")
+    $scope.bpm = $scope.bpm + 4
+  }
+  $scope.minusTempo = () => {
+    console.log("minus")
+    $scope.bpm = $scope.bpm - 4
+  }
 
-      if(beet.value) {
-        beet.value = false
+  // MUTE FEATURE
+  $scope.mute = (instrument) => {
+    Object.defineProperty(instrument, 'muted', {
+      value: !instrument.muted,
+      enumerable: false
+    })
 
-      } else {
-        beet.value = true
-      }
-
-    }
-
-$scope.plusTempo = () => {
-  console.log("plus")
-  $scope.bpm = $scope.bpm + 4
-}
-$scope.minusTempo = () => {
-  console.log("minus")
-  $scope.bpm = $scope.bpm - 4
-}
-
-// MUTE FEATURE
-$scope.mute= (instrument)=> {
-  Object.defineProperty(instrument, 'muted', {
-    value: !instrument.muted, enumerable: false
-  })
-
-  // instrument.muted = !instrument.muted
-  const name = instrument[0].name
-  let newName = name.replace('0','')
-  console.log("hey", newName )
-  playFactory.toggleMute(newName, instrument.muted)
-}
+    // instrument.muted = !instrument.muted <--muted becomes enumerable and is loaded visually
+    const name = instrument[0].name
+    let newName = name.replace('0', '')
+    console.log("hey", newName)
+    playFactory.toggleMute(newName, instrument.muted)
+  }
   $scope.newBeet = () => {
-    // $scope.stop()
-       instruments = {
+      if ($scope.playing) {
+        $scope.stop()
+      }
+      instruments = {
           hihat: {},
           kick: {},
           openhihat: {},
@@ -74,8 +73,10 @@ $scope.mute= (instrument)=> {
         //adding files to instruments object
       for (name in instruments) {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
-      Object.defineProperty(instruments[name], 'muted', {
-          value: false, enumerable: false, writable: true
+        Object.defineProperty(instruments[name], 'muted', {
+          value: false,
+          enumerable: false,
+          writable: true
         })
         for (var i = 0; i < grid; i++) {
           instruments[name][i] = {
@@ -91,53 +92,55 @@ $scope.mute= (instrument)=> {
     } // end newBeet
   $scope.newBeet()
 
-$scope.checkAuth = ()=> {
+  $scope.checkAuth = () => {
+    if (!user) {
+      var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+      Materialize.toast($toastContent, 3500);
+    } else {
+      $location.url('/beetGarden')
+    }
+  }
+
   if (!user) {
     var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
     Materialize.toast($toastContent, 3500);
-  } else {
-    $location.url('/beetGarden')
   }
-}
-
-if (!user) {
-  var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
-  Materialize.toast($toastContent, 3500);
-}
 
 
-// $scope.instruments =  playFactory.newBeet()
+  // $scope.instruments =  playFactory.newBeet()
 
-//stop
-$scope.stop = () => {
-    clearInterval(intervalId)
-    $scope.playing = false
+  //stop
+  $scope.stop = () => {
+    if (intervalId) {
+      clearInterval(intervalId)
+      $scope.playing = false
+    }
   }
 
   //save pattern and convert to object
-$scope.save = function() {
-   var $toastContent = $('<span class="toast">Beet Saved</span>');
+  $scope.save = function() {
+    var $toastContent = $('<span class="toast">Beet Saved</span>');
     Materialize.toast($toastContent, 1000);
-  let uid = $scope.UID
-  let beetName = $scope.loopName
-  let bpm = $scope.bpm
-  let savedInstruments = $scope.instruments
+    let uid = $scope.UID
+    let beetName = $scope.loopName
+    let bpm = $scope.bpm
+    let savedInstruments = $scope.instruments
 
-  beetFactory.save(uid,beetName,bpm, savedInstruments,grid)
-}
+    beetFactory.save(uid, beetName, bpm, savedInstruments, grid)
+  }
 
-    // MUTE FEATURE
-$scope.mute= (instrument)=> {
+  // MUTE FEATURE
+  $scope.mute = (instrument) => {
 
-  instrument.muted = !instrument.muted
-  const name = instrument[0].name
-  let newName = name.replace('0','')
-  console.log("hey", newName )
-  console.log("muting:", newName)
-  playFactory.toggleMute(newName, instrument.muted)
-}
+    instrument.muted = !instrument.muted
+    const name = instrument[0].name
+    let newName = name.replace('0', '')
+    console.log("hey", newName)
+    console.log("muting:", newName)
+    playFactory.toggleMute(newName, instrument.muted)
+  }
 
-//set interval which calls a set timeout
+  //set interval which calls a set timeout
 
 
   //loads last saved beet ---SAVE
