@@ -13,23 +13,24 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
     $scope.UID = uid
   })
 
-//1. play and establish timing
+  //1. play and establish timing
   $scope.play = () => {
     $scope.playing = true
 
     //establish timing
-    let time = 60000 / $scope.bpm
-    let measure = time * 4
-    let bpm = time / 4
-    playFactory.loadPattern(bpm, instruments, grid)
+//$scope.bpm starts in bpm and is converted to milliseconds
+//this works the 1st time but the second time measure takes milliseconds and converts to milliseconds again
+    let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
+    // let bpm = time / 4
+    playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
       //grabbing return value ID of interval before firing pattern
     intervalId = setInterval(() => {
-      playFactory.loadPattern(bpm, instruments, grid)
+      playFactory.loadPattern($scope.bpm, instruments, grid)
     }, measure)
 
   }
 
-//toggle individual beet value
+  //toggle individual beet value
   $scope.changeValue = (beet) => {
     if (beet.value) {
       beet.value = false
@@ -38,7 +39,7 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
     }
   }
 
-//tempo adjust
+  //tempo adjust
   $scope.plusTempo = () => {
     console.log("plus")
     $scope.bpm = $scope.bpm + 4
@@ -48,19 +49,8 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
     $scope.bpm = $scope.bpm - 4
   }
 
-  // MUTE FEATURE
-  $scope.mute = (instrument) => {
-    Object.defineProperty(instrument, 'muted', {
-      value: !instrument.muted,
-      enumerable: false
-    })
 
-    // instrument.muted = !instrument.muted <--muted becomes enumerable and is loaded visually
-    const name = instrument[0].name
-    let newName = name.replace('0', '')
-    console.log("hey", newName)
-    playFactory.toggleMute(newName, instrument.muted)
-  }
+
   $scope.newBeet = () => {
       if ($scope.playing) {
         $scope.stop()
@@ -102,7 +92,7 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
     }
   }
 
-//save pattern and convert to object
+  //save pattern and convert to object
   $scope.save = function() {
     var $toastContent = $('<span class="toast">Beet Saved</span>');
     Materialize.toast($toastContent, 1000);
@@ -114,30 +104,17 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
     beetFactory.save(uid, beetName, bpm, savedInstruments, grid)
   }
 
-  // MUTE FEATURE
-  $scope.mute = (instrument) => {
-
-    instrument.muted = !instrument.muted
-    const name = instrument[0].name
-    let newName = name.replace('0', '')
-    console.log("hey", newName)
-    console.log("muting:", newName)
-    playFactory.toggleMute(newName, instrument.muted)
-  }
-
-  //set interval which calls a set timeout
-
-//user must be logged in to navigate to beetgarden
+  //user must be logged in to navigate to beetgarden
   $scope.checkAuth = () => {
-    if (!user) {
-      var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
-      Materialize.toast($toastContent, 3500);
-    } else {
-      $scope.stop()
-      $location.url('/beetGarden')
+      if (!user) {
+        var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+        Materialize.toast($toastContent, 3500);
+      } else {
+        $scope.stop()
+        $location.url('/beetGarden')
+      }
     }
-  }
-// UX to let user know to sign in to save beets
+    // UX to let user know to sign in to save beets
   if (!user) {
     var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
     Materialize.toast($toastContent, 3500);
@@ -153,6 +130,17 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
   //     })
   // }
 
+  // MUTE FEATURE
+  $scope.mute = (instrument) => {
+    Object.defineProperty(instrument, 'muted', {
+        value: !instrument.muted,
+        enumerable: false
+      })
+      // instrument.muted = !instrument.muted <--muted becomes enumerable and is loaded visually
+    const name = instrument[0].name
+    let newName = name.replace('0', '')
+    playFactory.toggleMute(newName, instrument.muted)
+  }
 
 
 });

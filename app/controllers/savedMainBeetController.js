@@ -1,4 +1,4 @@
-app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
+app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
 
   $scope.grid = 16;
   // let $scope.grid = $scope.$scope.grid
@@ -11,34 +11,36 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
     $scope.UID = uid
   })
 
-  $scope.newBeet =(grid)=> {
-     if ($scope.playing) {
-        $scope.stop()
-      }
-  $scope.instruments =  playFactory.newBeet(grid)
-}
+  $scope.newBeet = (grid) => {
+    if ($scope.playing) {
+      $scope.stop()
+    }
+    $scope.instruments = playFactory.newBeet(grid)
+  }
   $scope.loadSavedBeet = (instruments, bpm) => {
 
       let defaultBeet = {
-        hihat:"",
-        kick:"",
-        openhihat:"",
+        hihat: "",
+        kick: "",
+        openhihat: "",
         snare: ""
       };
 
       $scope.loopName = name
       $scope.bpm = bpm
 
-        //adding files to instruments object
+      //adding files to instruments object
       for (key in defaultBeet) {
         // add 16 tracks per row
         if (!instruments[key]) {
           instruments[key] = []
         }
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
         Object.defineProperty(instruments[key], 'muted', {
-          value:false, enumerable: false, writable: true
+          value: false,
+          enumerable: false,
+          writable: true
         })
 
         for (var i = 0; i < $scope.grid; i++) {
@@ -53,25 +55,25 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
 
     } // end savedBeets
 
-$scope.loadSavedBeet(instruments, bpm, name, data)
+  $scope.loadSavedBeet(instruments, bpm, name, data)
 
   $scope.plusTempo = () => {
-  console.log("plus")
-  $scope.bpm = $scope.bpm + 4
-}
-$scope.minusTempo = () => {
-  console.log("minus")
-  $scope.bpm = $scope.bpm - 4
-}
+    console.log("plus")
+    $scope.bpm = $scope.bpm + 4
+  }
+  $scope.minusTempo = () => {
+    console.log("minus")
+    $scope.bpm = $scope.bpm - 4
+  }
 
   //1. play and establish timing
-  $scope.play = function(instruments,bpm) {
+  $scope.play = function(instruments, bpm) {
     $scope.playing = true
       //establish timing
 
     let time = 60000 / bpm
     let measure = time * 4
-    let rate = time/4
+    let rate = time / 4
     playFactory.loadPattern(rate, instruments, $scope.grid)
       //grabbing return value ID of interval before firing pattern loop
     intervalId = setInterval(() => {
@@ -90,63 +92,61 @@ $scope.minusTempo = () => {
 
   //save pattern and convert to object
   $scope.save = function() {
-    var $toastContent = $('<span>Beet Saved</span>');
-    Materialize.toast($toastContent, 1000);
+      var $toastContent = $('<span>Beet Saved</span>');
+      Materialize.toast($toastContent, 1000);
 
-    let uid = $scope.UID
-    let beetName = $scope.loopName
-    let bpm = $scope.bpm
-    let savedInstruments = $scope.instruments
+      let uid = $scope.UID
+      let beetName = $scope.loopName
+      let bpm = $scope.bpm
+      let savedInstruments = $scope.instruments
 
-    beetFactory.save(uid, beetName, bpm, savedInstruments, $scope.grid)
-  }
-//change pattern
-   $scope.changeValue = (beet)=>{
-      // console.log(beet)
-      // let value = beet.value
-      if(beet.value) {
-        beet.value = false
-      } else {
-        beet.value = true
-      }
-      // console.log("after", beet.value)
+      beetFactory.save(uid, beetName, bpm, savedInstruments, $scope.grid)
     }
+    //change pattern
+  $scope.changeValue = (beet) => {
+    // console.log(beet)
+    // let value = beet.value
+    if (beet.value) {
+      beet.value = false
+    } else {
+      beet.value = true
+    }
+    // console.log("after", beet.value)
+  }
 
-$scope.checkAuth = ()=> {
+  $scope.checkAuth = () => {
+    if (!user) {
+      var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+      Materialize.toast($toastContent, 3500);
+    } else {
+      $scope.stop()
+      $location.url('/beetGarden')
+    }
+  }
+
   if (!user) {
     var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
     Materialize.toast($toastContent, 3500);
-  } else {
-    $scope.stop()
-    $location.url('/beetGarden')
   }
-}
 
-if (!user) {
-  var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
-  Materialize.toast($toastContent, 3500);
-}
+  // MUTE FEATURE
+  $scope.mute = (instrument) => {
 
-    // MUTE FEATURE
-$scope.mute= (instrument)=> {
+    instrument.muted = !instrument.muted
+    const name = instrument[0].name
+    let newName = name.replace('0', '')
+    playFactory.toggleMute(newName, instrument.muted)
+  }
 
-  instrument.muted = !instrument.muted
-  const name = instrument[0].name
-  let newName = name.replace('0','')
-  console.log("hey", newName )
-  console.log("muting:", newName)
-  playFactory.toggleMute(newName, instrument.muted)
-}
-
-//select all feature
-$('.beet').click(function(e){
-  debugger
-  console.log("above")
-//   if(e.shiftKey) {
-// console.log("in")
-//     $scope.beet.value = true
-//   }
-})
+  //select all feature
+  $('.beet').click(function(e) {
+    // debugger
+    console.log("above")
+      //   if(e.shiftKey) {
+      // console.log("in")
+      //     $scope.beet.value = true
+      //   }
+  })
 
 
 

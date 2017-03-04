@@ -1,7 +1,7 @@
 app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
   function playPatternSound(value, sound, i, bpm, instruments, instrument) {
-
+        bpm = (60000/ bpm ) / 4;
     setTimeout(function() {
 
         instruments[instrument][i].playing = true
@@ -72,6 +72,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
 
     loadPattern: (bpm, instruments, grid) => {
+
 
       for (instrument in instruments) {
         for (let i = 0; i < grid; i++) {
