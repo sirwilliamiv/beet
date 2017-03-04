@@ -1,7 +1,7 @@
 app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
 
   $scope.grid = 16;
-  let grid = $scope.grid
+  // let $scope.grid = $scope.$scope.grid
   $scope.playing = false
 
 
@@ -12,9 +12,10 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
   })
 
   $scope.newBeet =(grid)=> {
-    // $scope.stop()
-
-    $scope.instruments =  playFactory.newBeet(grid)
+     if ($scope.playing) {
+        $scope.stop()
+      }
+  $scope.instruments =  playFactory.newBeet(grid)
 }
   $scope.loadSavedBeet = (instruments, bpm) => {
 
@@ -40,12 +41,12 @@ app.controller('savedMainCtrl', function($http,$location, $scope, $timeout, $int
           value:false, enumerable: false, writable: true
         })
 
-        for (var i = 0; i < grid; i++) {
+        for (var i = 0; i < $scope.grid; i++) {
           instruments[key][i] = {
             name: [key] + i,
             value: instruments[key][i] || false
           }
-        } // end grid for loop
+        } // end $scope.grid for loop
       } //end sounds for in loop key in instruments
 
       return $scope.instruments = instruments
@@ -66,25 +67,25 @@ $scope.minusTempo = () => {
   //1. play and establish timing
   $scope.play = function(instruments,bpm) {
     $scope.playing = true
-    // console.log($scope.bpm)
       //establish timing
 
     let time = 60000 / bpm
     let measure = time * 4
     let rate = time/4
-    playFactory.loadPattern(rate, instruments, grid)
-      //grabbing return value ID of interval before firing pattern
+    playFactory.loadPattern(rate, instruments, $scope.grid)
+      //grabbing return value ID of interval before firing pattern loop
     intervalId = setInterval(() => {
-
-      playFactory.loadPattern(rate, instruments, grid)
+      playFactory.loadPattern(rate, instruments, $scope.grid)
     }, measure)
   }
 
 
 
   $scope.stop = () => {
-    clearInterval(intervalId)
-    $scope.playing = false
+    if (intervalId) {
+      clearInterval(intervalId)
+      $scope.playing = false
+    }
   }
 
   //save pattern and convert to object
@@ -97,7 +98,7 @@ $scope.minusTempo = () => {
     let bpm = $scope.bpm
     let savedInstruments = $scope.instruments
 
-    beetFactory.save(uid, beetName, bpm, savedInstruments, grid)
+    beetFactory.save(uid, beetName, bpm, savedInstruments, $scope.grid)
   }
 //change pattern
    $scope.changeValue = (beet)=>{
@@ -116,6 +117,7 @@ $scope.checkAuth = ()=> {
     var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
     Materialize.toast($toastContent, 3500);
   } else {
+    $scope.stop()
     $location.url('/beetGarden')
   }
 }

@@ -2,6 +2,7 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
 
 
   $scope.grid = 16;
+  // let grid = $scope.grid
   $scope.bpm = 90
   $scope.playing = false
   let grid = $scope.grid
@@ -72,6 +73,7 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
         }
         //adding files to instruments object
       for (name in instruments) {
+        // adding muted property
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
         Object.defineProperty(instruments[name], 'muted', {
           value: false,
@@ -92,23 +94,6 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
     } // end newBeet
   $scope.newBeet()
 
-  $scope.checkAuth = () => {
-    if (!user) {
-      var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
-      Materialize.toast($toastContent, 3500);
-    } else {
-      $location.url('/beetGarden')
-    }
-  }
-
-  if (!user) {
-    var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
-    Materialize.toast($toastContent, 3500);
-  }
-
-
-  // $scope.instruments =  playFactory.newBeet()
-
   //stop
   $scope.stop = () => {
     if (intervalId) {
@@ -117,7 +102,7 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
     }
   }
 
-  //save pattern and convert to object
+//save pattern and convert to object
   $scope.save = function() {
     var $toastContent = $('<span class="toast">Beet Saved</span>');
     Materialize.toast($toastContent, 1000);
@@ -142,16 +127,32 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
 
   //set interval which calls a set timeout
 
+//user must be logged in to navigate to beetgarden
+  $scope.checkAuth = () => {
+    if (!user) {
+      var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+      Materialize.toast($toastContent, 3500);
+    } else {
+      $scope.stop()
+      $location.url('/beetGarden')
+    }
+  }
+// UX to let user know to sign in to save beets
+  if (!user) {
+    var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
+    Materialize.toast($toastContent, 3500);
+  }
+
 
   //loads last saved beet ---SAVE
   // $scope.loadFB = function() {
   //     beetFactory.load().then((userBeets) => {
-  //       console.log("loading?")
+  //       console.log("loading")
   //       $scope.savedToPlay(userBeets)
 
   //     })
   // }
-  //     // $http.get(`https://beet-35be8.firebaseio.com/userBeets.json`)
+
 
 
 });

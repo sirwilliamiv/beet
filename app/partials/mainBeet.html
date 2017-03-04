@@ -6,9 +6,6 @@
   <div class="links">
     <a class="aTags" ng-click="checkAuth()">My BeetGarden</a>
   </div>
-  <!-- <div id="loginButton" data-target="loginModal" class="links">
-    <a class="aTags">LOGIN</a>
-  </div> -->
     <div ng-controller="logoutCtrl" ng-click="logout()" class="links">
     <a class="aTags">LOGOUT</a>
   </div>
@@ -24,7 +21,7 @@
       <img class="controls" ng-if="playing === false" id="play" ng-click="play(instruments,bpm)" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_play.png">
       <img class="controls" ng-if="playing === true" id="stop" ng-click="stop()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_stop.png">
       <img class="controls" id="save" class="save" ng-click="save()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_save.png">
-      <img ng-click="newBeet(grid)" id="reset" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
+      <img ng-click="newBeet($scope.grid)" id="reset" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
       <img class="controls tempo" id="minus" ng-click="minusTempo()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png">
       <img class="controls tempo" id="plus" ng-click="plusTempo()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png">
       <input id="bpm" type="text" ng-model="bpm" placeholder="BPM">
