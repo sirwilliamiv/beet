@@ -67,18 +67,17 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
   }
 
   //1. play and establish timing
-  $scope.play = function(instruments, bpm) {
+ $scope.play = () => {
     $scope.playing = true
-      //establish timing
+    //establish timing
+    let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
 
-    let time = 60000 / bpm
-    let measure = time * 4
-    let rate = time / 4
-    playFactory.loadPattern(rate, instruments, $scope.grid)
-      //grabbing return value ID of interval before firing pattern loop
-    intervalId = setInterval(() => {
-      playFactory.loadPattern(rate, instruments, $scope.grid)
-    }, measure)
+    playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
+      //grabbing return value ID of interval before firing pattern
+    // intervalId = setInterval(() => {
+    //   playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
+    // }, measure)
+
   }
 
 
@@ -129,13 +128,17 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
     Materialize.toast($toastContent, 3500);
   }
 
-  // MUTE FEATURE
+  // MUTE TRACK
   $scope.mute = (instrument) => {
 
     instrument.muted = !instrument.muted
     const name = instrument[0].name
     let newName = name.replace('0', '')
     playFactory.toggleMute(newName, instrument.muted)
+  }
+  //SELECT ALL IN TRACK
+  $scope.selectAll = (instrument, grid) => {
+
   }
 
   //select all feature
@@ -147,6 +150,20 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
       //     $scope.beet.value = true
       //   }
   })
+
+    function highlightPattern(value, sound, i, bpm, instruments, instrument) {
+
+    bpm = (60000 / bpm) / 4; // lets bpm be updated dynamically
+
+    setTimeout(() => {
+      instruments[instrument][i].playing = true
+      if (value) {
+        samples[sound].play() //play sound
+      }
+    }, bpm * i);
+    instruments[instrument][i].playing = false
+
+  }
 
 
 

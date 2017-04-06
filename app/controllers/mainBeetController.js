@@ -16,18 +16,14 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
   //1. play and establish timing
   $scope.play = () => {
     $scope.playing = true
-
     //establish timing
-//$scope.bpm starts in bpm and is converted to milliseconds
-//this works the 1st time but the second time measure takes milliseconds and converts to milliseconds again
     let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
-    // let bpm = time / 4
     playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
       //grabbing return value ID of interval before firing pattern
     intervalId = setInterval(() => {
       playFactory.loadPattern($scope.bpm, instruments, grid)
     }, measure)
-
+//need a function which subtracts total time thru measure from end of measure
   }
 
   //toggle individual beet value

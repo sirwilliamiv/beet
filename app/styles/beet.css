@@ -62,7 +62,7 @@ body {
 }
 
 .follow {
-  height:5.5rem;
+  opacity: 0.2;
 }
 
 #bpm {
