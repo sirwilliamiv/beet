@@ -73,6 +73,9 @@ footer {
   /*display: none;*/
 
 }
+.muteString {
+  font-size: .7rem;
+}
 
 .follow {
   opacity: 0.2;

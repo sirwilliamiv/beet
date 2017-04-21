@@ -16,6 +16,7 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
       $scope.stop()
     }
     $scope.instruments = playFactory.newBeet(grid)
+    console.log($scope.instrument)
   }
   $scope.loadSavedBeet = (instruments, bpm) => {
 
@@ -135,7 +136,7 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
       var $toastContent = $('<span>Login to Save/View your BEETZ</span>');
       Materialize.toast($toastContent, 3500);
     } else {
-      $scope.stop()
+      // $scope.stop()
       $location.url('/beetGarden')
     }
   }

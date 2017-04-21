@@ -16,6 +16,7 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
   //1. play and establish timing
   //  //1. play and establish timing
   $scope.play = () => {
+   console.log(instruments)
       $scope.playing = true
       // console.log($scope.bpm)
         //establish timing
