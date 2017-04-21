@@ -14,17 +14,35 @@ app.controller('mainCtrl', function($location, $scope, $timeout, $interval, auth
   })
 
   //1. play and establish timing
+  //  //1. play and establish timing
   $scope.play = () => {
-    $scope.playing = true
-    //establish timing
-    let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
-    playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
-      //grabbing return value ID of interval before firing pattern
-    intervalId = setInterval(() => {
-      playFactory.loadPattern($scope.bpm, instruments, grid)
-    }, measure)
-//need a function which subtracts total time thru measure from end of measure
-  }
+      $scope.playing = true
+      // console.log($scope.bpm)
+        //establish timing
+      let time = 60000 / $scope.bpm
+      let measure = time * 4
+      let bpm = time / 4
+      playFactory.loadPattern(bpm, instruments, grid)
+        //grabbing return value ID of interval before firing pattern
+      intervalId = setInterval(() => {
+        // let bpm = instruments.hihat.0.bpm
+        // $scope.loadPattern(bpm)
+
+        playFactory.loadPattern(bpm, instruments, grid)
+      }, measure)
+    }
+  //version 2.0
+//   $scope.play = () => {
+//     $scope.playing = true
+//     //establish timing
+//     let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
+//     playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
+//       //grabbing return value ID of interval before firing pattern
+//     intervalId = setInterval(() => {
+//       playFactory.loadPattern($scope.bpm, instruments, grid)
+//     }, measure)
+// //need a function which subtracts total time thru measure from end of measure
+//   }
 
   //toggle individual beet value
   $scope.changeValue = (beet) => {
