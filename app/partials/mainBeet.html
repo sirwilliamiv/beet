@@ -24,7 +24,7 @@
       <img ng-click="newBeet($scope.grid)" id="reset" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/btn_reset.png">
       <img class="controls tempo" id="minus" ng-click="minusTempo()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_dec.png">
       <img class="controls tempo" id="plus" ng-click="plusTempo()" ng-src="http://webaudiodemos.appspot.com/MIDIDrums/images/tempo_inc.png">
-      <input id="bpm" type="text" ng-model="bpm" placeholder="BPM">
+      <input id="bpm" type="text" maxlength="3" ng-model="bpm" placeholder="BPM">
     </div>
     <!-- end controls -->
     <div ng-repeat="instrument in instruments">
