@@ -73,6 +73,7 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
       //establish timing
 
     let time = 60000 / bpm
+       // let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
     let measure = time * 4
     let rate = time/4
     playFactory.loadPattern(rate, instruments, grid)

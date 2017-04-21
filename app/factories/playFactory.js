@@ -2,7 +2,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
   function playPatternSound(value, sound, i, bpm, instruments, instrument) {
 
-    bpm = (60000 / bpm) / 4; // lets bpm be updated dynamically
+    // bpm = (60000 / bpm) / 4; // lets bpm be updated dynamically
 
     setTimeout(() => {
       // instruments[instrument][i].playing = true
