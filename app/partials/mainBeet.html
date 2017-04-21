@@ -24,17 +24,20 @@
       <input id="bpm" type="numbers" maxlength="3" ng-model="bpm" placeholder="BPM">
     </div>
     <!-- end controls -->
-    <div ng-repeat="instrument in instruments">
+    <div ng-repeat="(key, instrument) in instruments">
 
     <!-- mute -->
     <div class="nameMute">
-      <span class="{{instrument[0].name}} muteString" ng-show="instrument.muted === false">Mute</span>
+    <span class"iName">{{key}}</span>
+      <span class="{{instrument[0].name}} muteString" ng-show="instrument.muted === false">M u t e</span>
       <span class="{{instrument[0].name}} muteString" ng-show="instrument.muted === true" >UNmute</span>
       <img id="{{instrument.name}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="app/assets/img/LED_{{instrument.muted}}.png">
        </div>  <!--end name mute -->
+
       <div class="grid-row" ng-repeat="beet in instrument track by $index">
         <img class="beet" ng-class=" {'follow':  beet.playing}" ng-src="app/assets/img/button-{{beet.value}}.png" alt="beetButton" ng-click="changeValue(beet)" id="beet{{beet.name}}">
       </div>
+
     </div>
   </section>
   <!--end drum-container -->
