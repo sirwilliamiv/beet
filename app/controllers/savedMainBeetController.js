@@ -1,12 +1,12 @@
 app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $interval, authFactory, beetFactory, playFactory, user) {
 
   $scope.grid = 16;
-  // let $scope.grid = $scope.$scope.grid
+  let grid = $scope.grid
   $scope.playing = false
 
 
 
-
+//set UID
   authFactory.getUser().then((uid) => {
     $scope.UID = uid
   })
@@ -67,18 +67,34 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
   }
 
   //1. play and establish timing
- $scope.play = () => {
+    $scope.play = function(instruments,bpm) {
     $scope.playing = true
-    //establish timing
-    let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
+    // console.log($scope.bpm)
+      //establish timing
 
-    playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
+    let time = 60000 / bpm
+    let measure = time * 4
+    let rate = time/4
+    playFactory.loadPattern(rate, instruments, grid)
       //grabbing return value ID of interval before firing pattern
-    // intervalId = setInterval(() => {
-    //   playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
-    // }, measure)
+    intervalId = setInterval(() => {
 
+      playFactory.loadPattern(rate, instruments, grid)
+    }, measure)
   }
+  //version 2.0
+ // $scope.play = () => {
+ //    $scope.playing = true
+ //    //establish timing
+ //    let measure = ((60000 / $scope.bpm) / 4) *  $scope.grid
+
+ //    playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
+ //      //grabbing return value ID of interval before firing pattern
+ //    // intervalId = setInterval(() => {
+ //    //   playFactory.loadPattern($scope.bpm, instruments, $scope.grid)
+ //    // }, measure)
+
+ //  }
 
 
 
@@ -141,29 +157,33 @@ app.controller('savedMainCtrl', function($http, $location, $scope, $timeout, $in
 
   }
 
+
+
+
+// version2.0
   //select all feature
-  $('.beet').click(function(e) {
-    // debugger
-    console.log("above")
-      //   if(e.shiftKey) {
-      // console.log("in")
-      //     $scope.beet.value = true
-      //   }
-  })
+  // $('.beet').click(function(e) {
+  //   // debugger
+  //   console.log("above")
+  //     //   if(e.shiftKey) {
+  //     // console.log("in")
+  //     //     $scope.beet.value = true
+  //     //   }
+  // })
+// verision 2.0
+  //   function highlightPattern(value, sound, i, bpm, instruments, instrument) {
 
-    function highlightPattern(value, sound, i, bpm, instruments, instrument) {
+  //   bpm = (60000 / bpm) / 4; // lets bpm be updated dynamically
 
-    bpm = (60000 / bpm) / 4; // lets bpm be updated dynamically
+  //   setTimeout(() => {
+  //     instruments[instrument][i].playing = true
+  //     if (value) {
+  //       samples[sound].play() //play sound
+  //     }
+  //   }, bpm * i);
+  //   instruments[instrument][i].playing = false
 
-    setTimeout(() => {
-      instruments[instrument][i].playing = true
-      if (value) {
-        samples[sound].play() //play sound
-      }
-    }, bpm * i);
-    instruments[instrument][i].playing = false
-
-  }
+  // }
 
 
 
