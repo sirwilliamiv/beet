@@ -9,8 +9,6 @@
 ## CREATE. SAVE. PLAY. DANCE
 
 
-Trello: https://trello.com/b/TjUlUcE7/beet
-https://app.moqups.com/sirwilliamiv/0PNJplmJgx/edit/page/a84a93e10
 
 ### Powered by AngularJS and a few 808 drum samples.
 drum machine images via: https://github.com/cwilso/MIDIDrums
