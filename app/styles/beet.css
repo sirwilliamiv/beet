@@ -75,6 +75,10 @@ footer {
   /*display: none;*/
 
 }
+.iName {
+font-size: 1.5rem;
+margin-right: 1rem;
+}
 .muteString {
   font-size: .7rem;
 }
@@ -100,10 +104,10 @@ footer {
 
   }
 
-  .beet {
-    width: 3.5em;
-    height: 3.5rem;
-  }
+.beet {
+  width: 3.5em;
+  height: 3.5rem;
+}
 
 .save {
   margin-right: -3px;

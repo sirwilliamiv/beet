@@ -28,7 +28,7 @@
 
     <!-- mute -->
     <div class="nameMute">
-    <span class"iName">{{key}}</span>
+    <span class="iName">{{key}}</span>
       <span class="{{instrument[0].name}} muteString" ng-show="instrument.muted === false">M u t e</span>
       <span class="{{instrument[0].name}} muteString" ng-show="instrument.muted === true" >UNmute</span>
       <img id="{{instrument.name}}" ng-class="{ muted: instrument.muted  }" ng-click="mute(instrument)" ng-src="app/assets/img/LED_{{instrument.muted}}.png">
