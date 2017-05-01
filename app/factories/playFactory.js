@@ -2,19 +2,17 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
   function playPatternSound(value, sound, i, bpm, instruments, instrument) {
 
-    setTimeout(function() {
+    // bpm = (60000 / bpm) / 4; // lets bpm be updated dynamically
 
-        instruments[instrument][i].playing = true
+    setTimeout(() => {
+      // instruments[instrument][i].playing = true
       if (value) {
-
         samples[sound].play() //play sound
-
       }
     }, bpm * i);
-
+    // instruments[instrument][i].playing = false
 
   }
-
 
   let samples = {
       hihat: new Howl({
@@ -45,10 +43,10 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
     newBeet: (grid) => {
       let instruments = {
 
-            hihat: {},
-            kick: {},
-            openhihat: {},
-            snare: {}
+          hihat: {},
+          kick: {},
+          openhihat: {},
+          snare: {}
 
         }
         //adding default value false to instruments object
@@ -63,7 +61,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
             playing: false
           }
         } // end grid for loop
-      // }//end name in beets
+        // }//end name in beets
       } //end instruments for in loop
       console.log(instruments)
 
@@ -73,6 +71,7 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
 
     loadPattern: (bpm, instruments, grid) => {
 
+
       for (instrument in instruments) {
         for (let i = 0; i < grid; i++) {
 
@@ -80,15 +79,19 @@ app.factory('playFactory', ($q, authFactory, $http, $location) => {
           var sound = instrument
           var value = instruments[instrument][i].value
 
-          playPatternSound(value, sound, i, bpm, instruments,instrument)
+          playPatternSound(value, sound, i, bpm, instruments, instrument)
+
         } //end for loop
       } //end for in loop
     }, //end loadPattern
     // MUTE FEATURE
     toggleMute: (name, onOff) => {
-        samples[name].mute(onOff)
+      samples[name].mute(onOff)
 
-      } //end mute
+    }, //end mute
+    selectAll: (name, grid) => {
+
+    }
 
 
 

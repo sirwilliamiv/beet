@@ -8,10 +8,7 @@ $scope.stuff = "things"
         newuid = response.uid;
         // console.log(newuid)
       })
-      // .then(() => {
-      //   let newUser = {"uid": newuid, "firstName": $scope.firstName, "lastName": $scope.lastName, "email": $scope.user_email};
-      //   authFactory.addUser(newUser);
-      // })
+
   };
 
   //register
@@ -29,5 +26,5 @@ $scope.stuff = "things"
   });
 
 
-// console.log("register")
+
 });
